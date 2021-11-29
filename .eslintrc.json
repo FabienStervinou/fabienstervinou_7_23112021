@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "standard"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "semi": ["error", "never"],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "object-curly-newline": ["error", { "multiline": true }],
+        "no-case-declarations": "off",
+        "no-var": 2,
+        "prefer-const": "off",
+        "eqeqeq": "off"
+    }
+}
