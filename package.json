@@ -1,0 +1,22 @@
+{
+  "name": "lespetitsplats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabienStervinou/fabienstervinou_7_23112021.git"
+  },
+  "author": "Fabien Stervinou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabienStervinou/fabienstervinou_7_23112021/issues"
+  },
+  "homepage": "https://github.com/FabienStervinou/fabienstervinou_7_23112021#readme",
+  "dependencies": {
+    "sass": "^1.43.5"
+  }
+}
