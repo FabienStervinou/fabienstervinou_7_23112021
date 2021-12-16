@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/styles/index.css">
+  <title>Les petits plats</title>
+</head>
+<body>
+  <header>
+    <img src="./assets/img/logo.svg" alt="Les petits plats logo">
+    <h1>Les petits plats</h1>
+  </header>
+  <main>
+    <form action="./index.html">
+      <div class="search">
+        <input type="search" name="search" id="search" placeholder="Rechercher un ingrédient, appareil, ustensils ou une recette">
+        <button type="submit">
+          <img src="./assets/img/search.svg" alt="Bouton de recherche" ></img>
+        </button>
+      </div>
+      <div class="filters">
+        <div class="filter filter-ingredient">
+          <input type="text" class="filter-input" placeholder="Ingrédients">
+          <button class="filter-btn">
+            <img src="./assets/img/arrow.svg" alt="Affiche tout les ingrédients">
+          </button>
+        </div>
+
+        <div class="filter filter-appareil">
+          <input type="text" class="filter-input" placeholder="Appareil">
+          <button class="filter-btn">
+            <img src="./assets/img/arrow.svg" alt="Affiche tout les ingrédients">
+          </button>
+        </div>
+
+        <div class="filter filter-ustensile">
+          <input type="text" class="filter-input" placeholder="Ustensiles">
+          <button class="filter-btn">
+            <img src="./assets/img/arrow.svg" alt="Affiche tout les ingrédients">
+          </button>
+        </div>
+      </div>
+    </form>
+  </main>
+  <script src="./js/App.js"></script>
+</body>
+</html>
