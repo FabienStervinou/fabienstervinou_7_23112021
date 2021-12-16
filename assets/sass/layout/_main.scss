@@ -1,0 +1,36 @@
+main {
+  margin: 20px 100px 0;
+
+  form {
+    .search {
+      position: relative;
+      width: 100%;
+
+      input {
+        width: 100%;
+        background-color: $color-grey1;
+        border-radius: $radius;
+        border: none;
+        padding: 22px;
+        line-height: 22px;
+        font-size: 18px;
+      }
+
+      button {
+        position: absolute;
+        height: 32px;
+        width: 32px;
+        background: none;
+        border: none;
+        right: 24px;
+        top: 16px;
+
+        svg {
+          position: relative;
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+  }
+}

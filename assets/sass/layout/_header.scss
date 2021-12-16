@@ -1,0 +1,19 @@
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+
+  img {
+    height: 50px;
+  }
+
+  h1 {
+    color: $color-primary;
+    font-weight: 700;
+    font-size: 36px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+}

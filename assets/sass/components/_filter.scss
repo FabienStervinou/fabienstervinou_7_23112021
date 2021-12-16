@@ -1,0 +1,55 @@
+.filters {
+  display: flex;
+  max-width: 570px;
+
+  .filter {
+    display: flex;
+    margin: 20px 20px 0 0;
+    padding: 0 20px;
+    border: none;
+    height: 70px;
+    color: $color-white;
+    border-radius: $radius;
+
+    &-ingredient {
+      background-color: $color-blue;
+    }
+
+    &-appareil {
+      background-color: $color-green;
+    }
+
+    &-ustensile {
+      background-color: $color-red;
+    }
+
+    &-input {
+      background: none;
+      border: none;
+      font-size: 18px;
+      width: 120px;
+      color: $color-white;
+      
+      &::placeholder {
+        color: $color-white;
+      }
+    }
+
+    &-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      img {
+        height: 20px;
+        width: 20px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
