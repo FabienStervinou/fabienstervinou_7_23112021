@@ -1,3 +1,108 @@
+* {
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  position: relative;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+header img {
+  height: 50px;
+}
+header h1 {
+  color: #D04F4F;
+  font-weight: 700;
+  font-size: 36px;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+main {
+  margin: 20px 100px 0;
+}
+main form .search {
+  position: relative;
+  width: 100%;
+}
+main form .search input {
+  width: 100%;
+  background-color: #E7E7E7;
+  border-radius: 5px;
+  border: none;
+  padding: 22px;
+  line-height: 22px;
+  font-size: 18px;
+}
+main form .search button {
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  background: none;
+  border: none;
+  right: 24px;
+  top: 16px;
+}
+main form .search button svg {
+  position: relative;
+  height: 30px;
+  width: 30px;
+}
+
+.filters {
+  display: flex;
+  max-width: 570px;
+}
+.filters .filter {
+  display: flex;
+  margin: 20px 20px 0 0;
+  padding: 0 20px;
+  border: none;
+  height: 70px;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.filters .filter-ingredient {
+  background-color: #3282F7;
+}
+.filters .filter-appareil {
+  background-color: #68D9A4;
+}
+.filters .filter-ustensile {
+  background-color: #ED6454;
+}
+.filters .filter-input {
+  background: none;
+  border: none;
+  font-size: 18px;
+  width: 120px;
+  color: #ffffff;
+}
+.filters .filter-input::placeholder {
+  color: #ffffff;
+}
+.filters .filter-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+}
+.filters .filter-btn:hover {
+  cursor: pointer;
+}
+.filters .filter-btn img {
+  height: 20px;
+  width: 20px;
+  transform: rotate(180deg);
+}
 
 /*# sourceMappingURL=index.css.map */
