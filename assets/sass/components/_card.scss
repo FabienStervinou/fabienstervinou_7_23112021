@@ -1,0 +1,72 @@
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .card {
+    max-width: 380px;
+    margin-bottom: 50px;
+    background-color: $color-grey1;
+    border-radius: $radius;
+
+    &-img {
+      max-width: 380px;
+      
+      img {
+        width: 100%;
+        border-radius: $radius $radius 0 0;
+        max-height: 180px;
+        object-fit: cover;
+      }
+    }
+
+    &-content {
+      padding: 20px;
+
+      &_header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .title {
+          font-weight: 700;
+          font-size: 18px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 250px;
+          overflow: hidden;
+        }
+
+        .time {
+          display: flex;
+          flex-wrap: wrap;
+
+          img {
+            margin-right: 7px;
+          }
+          p {}
+        }
+      }
+
+      &_main {
+        display: flex;
+        font-size: 12px;
+
+        .left {
+          width: 50%;
+
+          .ingredient {
+            font-weight: 700;
+
+            span {
+              font-weight: 400;
+            }
+          }
+        }
+        .right {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
