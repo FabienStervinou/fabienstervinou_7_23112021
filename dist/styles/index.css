@@ -58,6 +58,10 @@ main form .search button svg {
   width: 30px;
 }
 
+main form {
+  padding-bottom: 20px;
+}
+
 .filters {
   display: flex;
   max-width: 570px;
@@ -103,6 +107,66 @@ main form .search button svg {
   height: 20px;
   width: 20px;
   transform: rotate(180deg);
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.cards .card {
+  max-width: 380px;
+  margin-bottom: 50px;
+  background-color: #E7E7E7;
+  border-radius: 5px;
+}
+.cards .card-img {
+  max-width: 380px;
+}
+.cards .card-img img {
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  max-height: 180px;
+  object-fit: cover;
+}
+.cards .card-content {
+  padding: 20px;
+}
+.cards .card-content_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cards .card-content_header .title {
+  font-weight: 700;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 250px;
+  overflow: hidden;
+}
+.cards .card-content_header .time {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cards .card-content_header .time img {
+  margin-right: 7px;
+}
+.cards .card-content_main {
+  display: flex;
+  font-size: 12px;
+}
+.cards .card-content_main .left {
+  width: 50%;
+}
+.cards .card-content_main .left .ingredient {
+  font-weight: 700;
+}
+.cards .card-content_main .left .ingredient span {
+  font-weight: 400;
+}
+.cards .card-content_main .right {
+  width: 50%;
 }
 
 /*# sourceMappingURL=index.css.map */
