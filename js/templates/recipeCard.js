@@ -1,13 +1,8 @@
-export default class RecipeCard {
+import Recipe from '../models/Recipe.js'
+
+export default class RecipeCard extends Recipe {
   constructor (recipe) {
-    this._id = recipe.id
-    this._name = recipe.name
-    this._servings = recipe.servings
-    this._ingredients = recipe.ingredients
-    this._time = recipe.time
-    this._description = recipe.description
-    this._appliance = recipe.appliance
-    this._ustensils = recipe.ustensils
+    super(recipe)
   }
 
   createRecipeCard () {
@@ -21,7 +16,7 @@ export default class RecipeCard {
             <div class="title">${this._name}</div>
             <div class="time">
               <img src="./assets//img/horloge.svg" alt="Icône teemps de préparation">
-              <p>${this._time}mins</p>
+              <p>${this._time} mins</p>
             </div>
           </div>
           <div class="card-content_main">
@@ -29,8 +24,8 @@ export default class RecipeCard {
 
             ${this._ingredients.map(item => `
             <div class="ingredient">
-              ${item.ingredint} :
-              <span>${item.quantite} ${item.unit}</span>
+              ${item.ingredient} :
+              <span>${item.quantity ? item.quantity : ""} ${item.unit ? item.unit : ""}</span>
             </div>
             `).join('')}
 
@@ -42,6 +37,8 @@ export default class RecipeCard {
         </div>
       </article>
     `
-    return recipeCard
+
+    const target = document.querySelector('.cards')
+    target.innerHTML += recipeCard
   }
 }
