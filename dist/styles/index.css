@@ -116,6 +116,7 @@ main form {
 }
 .cards .card {
   max-width: 380px;
+  min-height: 360px;
   margin-bottom: 50px;
   background-color: #E7E7E7;
   border-radius: 5px;
