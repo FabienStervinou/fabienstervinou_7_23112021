@@ -143,7 +143,7 @@ main form {
   font-size: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 250px;
+  max-width: 240px;
   overflow: hidden;
 }
 .cards .card-content_header .time {
@@ -168,6 +168,9 @@ main form {
 }
 .cards .card-content_main .right {
   width: 50%;
+  text-overflow: ellipsis;
+  max-height: 101px;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=index.css.map */
