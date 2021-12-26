@@ -25,7 +25,7 @@ export default class RecipeCard extends Recipe {
             ${this._ingredients.map(item => `
             <div class="ingredient">
               ${item.ingredient} :
-              <span>${item.quantity ? item.quantity : ""} ${item.unit ? item.unit : ""}</span>
+              <span>${item.quantity ? item.quantity : ""} ${item.unit == "grammes" ? "g" : !item.unit != undefined ? "" : item.unit}</span>
             </div>
             `).join('')}
 
