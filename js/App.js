@@ -1,10 +1,11 @@
 import Api from './api/Api.js'
 import RecipeCard from './templates/recipeCard.js'
-// import Recipe from './models/Recipe.js'
+import SearchForm from './templates/searchForm.js'
 
 class App {
   constructor() {
     this.recipesApi = new Api('../data/recipes.json')
+    this.searchForm = new SearchForm()
   }
 
   async fetchRecipes () {
@@ -16,6 +17,7 @@ class App {
 
   async main() {
     console.log('App running 🔥')
+    this.searchForm.createSearchForm()
 
     let recipeArray = []
     const recipes = await this.fetchRecipes()
