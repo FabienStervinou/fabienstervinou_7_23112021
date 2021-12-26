@@ -1,11 +1,13 @@
 import Api from './api/Api.js'
 import RecipeCard from './templates/recipeCard.js'
 import SearchForm from './templates/searchForm.js'
+import Search from './/models/Search.js'
 
 class App {
   constructor() {
     this.recipesApi = new Api('../data/recipes.json')
     this.searchForm = new SearchForm()
+    this.search = new Search()
   }
 
   async fetchRecipes () {
@@ -19,7 +21,6 @@ class App {
     console.log('App running 🔥')
     this.searchForm.createSearchForm()
 
-    let recipeArray = []
     const recipes = await this.fetchRecipes()
 
     if (recipes) {
@@ -28,9 +29,11 @@ class App {
         let recipeObject = new RecipeCard(recipe)
         recipeObject.createRecipeCard()
       }
-      
     }
-    console.log(recipeArray)
+
+    // Init form
+    this.search.init(recipes)
+
   }
 }
 
