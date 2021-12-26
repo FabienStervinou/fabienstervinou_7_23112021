@@ -457,7 +457,7 @@
                 {
                     "ingredient": "huile d'olive",
                     "quantity": 2,
-                    "unit": "cuillère à soupe"
+                    "unit": "cuillères à soupe"
                 }
             ],
             "time":40,
@@ -572,7 +572,7 @@
                 {
                     "ingredient": "huile d'olives",
                     "quantity": 2,
-                    "unit": "cuillère à soupe"
+                    "unit": "cuillères à soupe"
                 }
             ],
             "time": 45,
@@ -942,7 +942,7 @@
                 {
                     "ingredient": "Crème fraîche",
                     "quantity": 4,
-                    "unit": "cuillère à soupe"
+                    "unit": "cuillères à soupe"
                 },
                 {
                     "ingredient": "Vermicelles",
