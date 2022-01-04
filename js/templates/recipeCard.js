@@ -7,7 +7,7 @@ export default class RecipeCard extends Recipe {
 
   createRecipeCard () {
     const recipeCard = `
-      <article class="card">
+      <article class="card" data-id="${this._id}">
         <div class="card-img">
           <img src="./assets/img/300x300.jpg" alt="Photo de ${this._name}">
         </div>
