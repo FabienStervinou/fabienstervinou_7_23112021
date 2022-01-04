@@ -33,9 +33,10 @@ export default class SearchEngine {
         ingredientSimplify = [...ingredientResult]
       }
 
+      // Remove deuplicate value from Array
       const result = [...descriptionSimplify, ...nameSimplify, ...ingredientSimplify]
-      // TODO: remove duplicate word
-      console.log('result :', result);
+      const uniqueResult = [...new Set(result)];
+      return uniqueResult
     }
   }
 }
