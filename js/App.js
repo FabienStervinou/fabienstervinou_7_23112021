@@ -2,6 +2,7 @@ import Api from './api/Api.js'
 import RecipeCard from './templates/recipeCard.js'
 import SearchForm from './templates/searchForm.js'
 import Search from './/models/Search.js'
+import SearchEngine from './/search/SearchEngine.js'
 
 class App {
   constructor() {
@@ -29,11 +30,13 @@ class App {
         let recipeObject = new RecipeCard(recipe)
         recipeObject.createRecipeCard()
       }
+      // Init form
+      this.search.init(recipes)
     }
 
-    // Init form
-    this.search.init(recipes)
-
+    // Starting prepare local data for request
+    this.searchEngine = new SearchEngine(recipes)
+    this.searchEngine.init()
   }
 }
 
