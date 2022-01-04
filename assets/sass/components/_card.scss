@@ -73,4 +73,8 @@
       }
     }
   }
+
+  .card:nth-child(odd) {
+    margin-right: 50px;
+  }
 }
