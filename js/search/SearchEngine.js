@@ -12,8 +12,10 @@ export default class SearchEngine {
   }
 
   simplifyData (data) {
+    const uniqueResultArray = []
+
     for (let i = 0; i < data.length; i++) {
-      const recipe = data[i];
+      const recipe = data[i]
 
       // Description
       let descriptionArray = recipe.description.replace('.', ' ').replace(',', '').replace(':', '').replace('°', '').replace('\'', ' ').toLowerCase().split(' ')
@@ -27,16 +29,18 @@ export default class SearchEngine {
       let ingredientsArray = recipe.ingredients
       let ingredientSimplify = []
       for (let i = 0; i < ingredientsArray.length; i++) {
-        const ingredients = ingredientsArray[i];
+        const ingredients = ingredientsArray[i]
         let ingredient = ingredients.ingredient.replace('.', ' ').replace(',', '').replace(':', '').replace('°', '').replace('\'', ' ').toLowerCase().split(' ')
         let ingredientResult = ingredient.filter( word => word.length >= 3)
         ingredientSimplify = [...ingredientResult]
       }
 
       // Remove deuplicate value from Array
-      const result = [...descriptionSimplify, ...nameSimplify, ...ingredientSimplify]
-      const uniqueResult = [...new Set(result)];
-      return uniqueResult
+      const result = [recipe.id, ...descriptionSimplify, ...nameSimplify, ...ingredientSimplify]
+      const uniqueResult = [...new Set(result)]
+      uniqueResultArray.push(uniqueResult)
     }
+
+    return uniqueResultArray
   }
 }
