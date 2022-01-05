@@ -18,7 +18,13 @@
   },
   "homepage": "https://github.com/FabienStervinou/fabienstervinou_7_23112021#readme",
   "dependencies": {
-    "eslint": "^8.5.0",
+    "eslint": "^7.32.0",
     "sass": "^1.43.5"
-  }
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0"
+  }   
 }

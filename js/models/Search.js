@@ -1,14 +1,14 @@
 export default class Search {
-  constructor () {
+  constructor() {
     this.isSearchActive = false
     this.data = null
   }
 
   /**
-   * 
-   * @param {Array} data 
+   *
+   * @param {Array} data
    */
-  init (data) {
+  init(data) {
     const searchDOM = document.querySelector('#search')
 
     if (searchDOM) {
@@ -21,16 +21,24 @@ export default class Search {
   }
 
   /**
-   * 
-   * @param {Event} e 
+   *
+   * @param {Event} e
    */
-  onSearchKeyUp (e) {
+  onSearchKeyUp(e) {
     if (e.target.value.length >= 3) {
       this.isSearchActive = true
-      console.log("Show result");
       this.updateRecipesSearch(e.target.value)
     } else {
       this.isSearchActive = false
     }
+  }
+
+  /**
+   *
+   * @param {String} value
+   */
+  updateRecipesSearch(value) {
+    console.log('value :', value)
+    console.log('this.data :', this.data)
   }
 }

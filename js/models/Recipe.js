@@ -1,5 +1,5 @@
 export default class Recipe {
-  constructor (data) {
+  constructor(data) {
     this._id = data.id
     this._name = data.name
     this._servings = data.servings
@@ -10,35 +10,35 @@ export default class Recipe {
     this._ustensils = data.ustensils
   }
 
-  get id () {
+  get id() {
     return this._id
   }
 
-  get name () {
+  get name() {
     return this._name
   }
 
-  get servings () {
+  get servings() {
     return this._servings
   }
 
-  get ingredients () {
+  get ingredients() {
     return this._ingredients
   }
 
-  get time () {
+  get time() {
     return this._time
   }
 
-  get description () {
+  get description() {
     return this._description
   }
 
-  get appliance () {
+  get appliance() {
     return this._appliance
   }
 
-  get ustensils () {
+  get ustensils() {
     return this._ustensils
   }
 }

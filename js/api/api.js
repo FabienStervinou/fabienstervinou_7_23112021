@@ -1,7 +1,7 @@
 export default class Api {
   /**
-   * 
-   * @param {string} url 
+   *
+   * @param {string} url
    */
   constructor(url) {
       this._url = url

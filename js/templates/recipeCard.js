@@ -1,11 +1,11 @@
 import Recipe from '../models/Recipe.js'
 
 export default class RecipeCard extends Recipe {
-  constructor (recipe) {
+  constructor(recipe) {
     super(recipe)
   }
 
-  createRecipeCard () {
+  createRecipeCard() {
     const recipeCard = `
       <article class="card" data-id="${this._id}">
         <div class="card-img">
@@ -25,11 +25,11 @@ export default class RecipeCard extends Recipe {
             ${this._ingredients.map(item => `
             <div class="ingredient">
               ${item.ingredient} :
-              <span>${item.quantity ? item.quantity : ""} 
-              ${item.unit == "grammes" ? "g" 
-              : item.unit == "cuillère à soupe" ? "CàS" 
-              : item.unit == "cuillères à soupe" ? "CàS"
-              : item.unit == undefined ? "" 
+              <span>${item.quantity ? item.quantity : ''} 
+              ${item.unit == 'grammes' ? 'g'
+              : item.unit == 'cuillère à soupe' ? 'CàS'
+              : item.unit == 'cuillères à soupe' ? 'CàS'
+              : item.unit == undefined ? ''
               : item.unit}</span>
             </div>
             `).join('')}

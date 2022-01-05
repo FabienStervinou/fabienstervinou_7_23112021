@@ -11,8 +11,8 @@ class App {
     this.search = new Search()
   }
 
-  async fetchRecipes () {
-    const recipesData = await this.recipesApi.getRecipes().then(res => { 
+  async fetchRecipes() {
+    const recipesData = await this.recipesApi.getRecipes().then(res => {
     return res
   })
     return recipesData
@@ -26,7 +26,7 @@ class App {
 
     if (recipes) {
       for (let i = 0; i < recipes.length; i++) {
-        const recipe = recipes[i];
+        const recipe = recipes[i]
         let recipeObject = new RecipeCard(recipe)
         recipeObject.createRecipeCard()
       }
