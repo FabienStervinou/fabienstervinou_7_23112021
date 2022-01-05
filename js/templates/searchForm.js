@@ -1,11 +1,11 @@
 import Search from '../models/Search.js'
 
 export default class SearchForm extends Search {
-  constructor() {
+  constructor () {
     super()
   }
 
-  createSearchForm() {
+  createSearchForm () {
     const searchFormString = `
     <form action="./index.html">
       <div class="search">

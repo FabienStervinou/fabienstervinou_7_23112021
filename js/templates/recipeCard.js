@@ -1,11 +1,11 @@
 import Recipe from '../models/Recipe.js'
 
 export default class RecipeCard extends Recipe {
-  constructor(recipe) {
+  constructor (recipe) {
     super(recipe)
   }
 
-  createRecipeCard() {
+  createRecipeCard () {
     const recipeCard = `
       <article class="card" data-id="${this._id}">
         <div class="card-img">

@@ -5,20 +5,20 @@ import Search from './/models/Search.js'
 import SearchEngine from './/search/SearchEngine.js'
 
 class App {
-  constructor() {
+  constructor () {
     this.recipesApi = new Api('../data/recipes.json')
     this.searchForm = new SearchForm()
     this.search = new Search()
   }
 
-  async fetchRecipes() {
+  async fetchRecipes () {
     const recipesData = await this.recipesApi.getRecipes().then(res => {
-    return res
-  })
+      return res
+    })
     return recipesData
   }
 
-  async main() {
+  async main () {
     console.log('App running 🔥')
     this.searchForm.createSearchForm()
 

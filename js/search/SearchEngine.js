@@ -3,15 +3,15 @@ export default class SearchEngine {
    *
    * @param {Array} data
    */
-  constructor(data) {
+  constructor (data) {
     this.data = data
   }
 
-  init() {
+  init () {
     this.simplifyData(this.data)
   }
 
-  simplifyData(data) {
+  simplifyData (data) {
     const uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {

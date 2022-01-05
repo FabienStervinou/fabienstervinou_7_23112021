@@ -20,6 +20,8 @@
         "no-case-declarations": "off",
         "no-var": 2,
         "prefer-const": "off",
-        "eqeqeq": "off"
+        "eqeqeq": "off",
+        "multiline-ternary": ["off"],
+        "no-useless-constructor": "off"
     }
 }

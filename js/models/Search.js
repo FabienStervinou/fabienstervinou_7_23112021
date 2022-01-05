@@ -1,5 +1,5 @@
 export default class Search {
-  constructor() {
+  constructor () {
     this.isSearchActive = false
     this.data = null
   }
@@ -8,7 +8,7 @@ export default class Search {
    *
    * @param {Array} data
    */
-  init(data) {
+  init (data) {
     const searchDOM = document.querySelector('#search')
 
     if (searchDOM) {
@@ -24,7 +24,7 @@ export default class Search {
    *
    * @param {Event} e
    */
-  onSearchKeyUp(e) {
+  onSearchKeyUp (e) {
     if (e.target.value.length >= 3) {
       this.isSearchActive = true
       this.updateRecipesSearch(e.target.value)
@@ -37,7 +37,7 @@ export default class Search {
    *
    * @param {String} value
    */
-  updateRecipesSearch(value) {
+  updateRecipesSearch (value) {
     console.log('value :', value)
     console.log('this.data :', this.data)
   }
