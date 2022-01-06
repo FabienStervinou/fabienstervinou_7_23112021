@@ -1,7 +1,10 @@
+import SearchEngine from '../search/SearchEngine.js'
+
 export default class Search {
-  constructor () {
+  constructor (data) {
     this.isSearchActive = false
-    this.data = null
+    this.data = data
+    this.init(this.data)
   }
 
   /**
@@ -17,7 +20,8 @@ export default class Search {
       })
     }
 
-    this.data = data
+    // Starting prepare local data for request
+    this.searchEngine = new SearchEngine(data)
   }
 
   /**

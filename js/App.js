@@ -2,13 +2,10 @@ import Api from './api/Api.js'
 import RecipeCard from './templates/recipeCard.js'
 import SearchForm from './templates/searchForm.js'
 import Search from './/models/Search.js'
-import SearchEngine from './/search/SearchEngine.js'
 
 class App {
   constructor () {
     this.recipesApi = new Api('../data/recipes.json')
-    this.searchForm = new SearchForm()
-    this.search = new Search()
   }
 
   async fetchRecipes () {
@@ -20,8 +17,6 @@ class App {
 
   async main () {
     console.log('App running 🔥')
-    this.searchForm.createSearchForm()
-
     const recipes = await this.fetchRecipes()
 
     if (recipes) {
@@ -31,12 +26,11 @@ class App {
         recipeObject.createRecipeCard()
       }
       // Init form
-      this.search.init(recipes)
-    }
+      this.search = new Search(recipes)
 
-    // Starting prepare local data for request
-    this.searchEngine = new SearchEngine(recipes)
-    this.searchEngine.init()
+      this.searchForm = new SearchForm(recipes)
+      this.searchForm.createSearchForm()
+    }
   }
 }
 

@@ -1,8 +1,8 @@
 import Search from '../models/Search.js'
 
 export default class SearchForm extends Search {
-  constructor () {
-    super()
+  constructor (data) {
+    super(data)
   }
 
   createSearchForm () {

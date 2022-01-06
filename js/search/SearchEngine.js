@@ -5,10 +5,11 @@ export default class SearchEngine {
    */
   constructor (data) {
     this.data = data
+    this.init(this.data)
   }
 
-  init () {
-    this.simplifyData(this.data)
+  init (data) {
+    this.simplifyData(data)
   }
 
   simplifyData (data) {
