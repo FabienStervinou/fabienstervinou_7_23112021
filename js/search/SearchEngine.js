@@ -5,6 +5,7 @@ export default class SearchEngine {
    */
   constructor (data) {
     this.data = data
+    this.dataSimplify = null
     this.init(this.data)
   }
 
@@ -42,6 +43,6 @@ export default class SearchEngine {
       uniqueResultArray.push(uniqueResult)
     }
 
-    return uniqueResultArray
+    this.dataSimplify = uniqueResultArray
   }
 }

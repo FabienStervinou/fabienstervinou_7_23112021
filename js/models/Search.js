@@ -4,6 +4,7 @@ export default class Search {
   constructor (data) {
     this.isSearchActive = false
     this.data = data
+    this.dataSimplify = null
   }
 
   /**
@@ -20,6 +21,7 @@ export default class Search {
 
     // Starting prepare local data for request
     this.searchEngine = new SearchEngine(this.data)
+    this.dataSimplify = this.searchEngine.dataSimplify
   }
 
   /**
@@ -41,6 +43,6 @@ export default class Search {
    */
   updateRecipesSearch (value) {
     console.log('value :', value)
-    console.log('this.data :', this.data)
+    console.log(this.dataSimplify)
   }
 }
