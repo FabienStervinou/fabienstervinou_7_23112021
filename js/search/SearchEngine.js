@@ -38,9 +38,13 @@ export default class SearchEngine {
       }
 
       // Remove duplicate value from Array
-      const result = [recipe.id, ...descriptionSimplify, ...nameSimplify, ...ingredientSimplify]
-      const uniqueResult = [...new Set(result)]
-      uniqueResultArray.push(uniqueResult)
+      const toSimplify = [...descriptionSimplify, ...nameSimplify, ...ingredientSimplify]
+      const uniqueResult = [...new Set(toSimplify)]
+      const result = {
+        id: recipe.id,
+        simplify: uniqueResult
+      }
+      uniqueResultArray.push(result)
     }
 
     this.dataSimplify = uniqueResultArray
