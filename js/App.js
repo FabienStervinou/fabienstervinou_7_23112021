@@ -27,9 +27,9 @@ class App {
       }
       // Init form
       this.search = new Search(recipes)
-
       this.searchForm = new SearchForm(recipes)
       this.searchForm.createSearchForm()
+      this.search.init(recipes)
     }
   }
 }

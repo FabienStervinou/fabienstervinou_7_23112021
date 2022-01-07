@@ -4,16 +4,14 @@ export default class Search {
   constructor (data) {
     this.isSearchActive = false
     this.data = data
-    this.init(this.data)
   }
 
   /**
    *
    * @param {Array} data
    */
-  init (data) {
+  init () {
     const searchDOM = document.querySelector('#search')
-
     if (searchDOM) {
       searchDOM.addEventListener('keyup', e => {
         this.onSearchKeyUp(e)
@@ -21,7 +19,7 @@ export default class Search {
     }
 
     // Starting prepare local data for request
-    this.searchEngine = new SearchEngine(data)
+    this.searchEngine = new SearchEngine(this.data)
   }
 
   /**
