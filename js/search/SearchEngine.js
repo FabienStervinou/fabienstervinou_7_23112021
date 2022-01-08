@@ -20,7 +20,7 @@ export default class SearchEngine {
       const recipe = data[i]
 
       // Description
-      let descriptionArray = recipe.description.replace('.', ' ').replace(',', '').replace(':', '').replace('°', '').replace('\'', ' ').toLowerCase().split(' ')
+      let descriptionArray = recipe.description.replaceAll(',', ' ').replaceAll(':', ' ').replaceAll('°', ' ').replaceAll('\'', ' ').replaceAll('(', ' ').replaceAll(')', ' ').replaceAll('.', ' ').toLowerCase().split(' ')
       let descriptionSimplify = descriptionArray.filter(word => word.length >= 3)
 
       // Name
@@ -32,7 +32,7 @@ export default class SearchEngine {
       let ingredientSimplify = []
       for (let i = 0; i < ingredientsArray.length; i++) {
         const ingredients = ingredientsArray[i]
-        let ingredient = ingredients.ingredient.replace('.', ' ').replace(',', '').replace(':', '').replace('°', '').replace('\'', ' ').toLowerCase().split(' ')
+        let ingredient = ingredients.ingredient.replaceAll(',', ' ').replaceAll(':', ' ').replaceAll('°', ' ').replaceAll('\'', ' ').replaceAll('(', ' ').replaceAll(')', ' ').replaceAll('.', ' ').toLowerCase().split(' ')
         let ingredientResult = ingredient.filter(word => word.length >= 3)
         ingredientSimplify = [...ingredientResult]
       }
