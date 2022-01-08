@@ -30,7 +30,33 @@ class App {
       this.searchForm = new SearchForm(recipes)
       this.searchForm.createSearchForm()
       this.search.init(recipes)
+
+      this.listenLocalStorage()
     }
+  }
+
+  listenLocalStorage () {
+    let originalSetItem = localStorage.setItem
+
+    localStorage.setItem = function (key, value) {
+      const event = new Event('isSearchActive')
+
+      event.value = value
+      event.key = key
+
+      originalSetItem.apply(this, arguments)
+      document.dispatchEvent(event)
+    }
+
+    const localStorageSetHandler = function (e) {
+      if (e.key === 'isSearchActive' && e.value === true) {
+        console.log('Update recipe')
+      } else {
+        console.log('Not updtae recipe')
+      }
+    }
+
+    document.addEventListener('isSearchActive', localStorageSetHandler, false)
   }
 }
 
