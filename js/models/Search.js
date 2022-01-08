@@ -1,4 +1,5 @@
 import SearchEngine from '../search/SearchEngine.js'
+// import RecipeCard from '../templates/recipeCard.js'
 
 export default class Search {
   constructor (data) {
@@ -30,10 +31,7 @@ export default class Search {
    */
   onSearchKeyUp (e) {
     if (e.target.value.length >= 3) {
-      this.isSearchActive = true
       this.updateRecipesSearch(e.target.value)
-    } else {
-      this.isSearchActive = false
     }
   }
 
@@ -42,7 +40,34 @@ export default class Search {
    * @param {String} value
    */
   updateRecipesSearch (value) {
-    console.log('value :', value)
-    console.log(this.dataSimplify)
+    const matchWord = []
+    const matchId = []
+
+    for (let i = 0; i < this.dataSimplify.length; i++) {
+      const element = this.dataSimplify[i]
+
+      element.simplify.forEach(word => {
+        if (word.includes(value)) {
+          matchWord.push(word)
+          matchId.push(element.id)
+        }
+      })
+    }
+
+    const matchWordUnique = [...new Set(matchWord)]
+    console.log('matchWordUnique :', matchWordUnique)
+
+    const matchIdUnique = [...new Set(matchId)]
+    console.log('matchIdUnique :', matchIdUnique)
+
+    if (matchIdUnique.length > 0) {
+      this.setLocalStorageIsSearchActiveTo(true)
+    } else {
+      this.setLocalStorageIsSearchActiveTo(false)
+    }
+  }
+
+  setLocalStorageIsSearchActiveTo (value) {
+    window.localStorage.setItem('isSearchActive', value)
   }
 }
