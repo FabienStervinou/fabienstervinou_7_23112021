@@ -6,6 +6,8 @@ import Search from './/models/Search.js'
 class App {
   constructor () {
     this.recipesApi = new Api('../data/recipes.json')
+    this.recipes = null
+    this.recipeCard = null
   }
 
   async fetchRecipes () {
@@ -22,8 +24,8 @@ class App {
     if (recipes) {
       for (let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i]
-        let recipeObject = new RecipeCard(recipe)
-        recipeObject.createRecipeCard()
+        this.recipeCard = new RecipeCard(recipe)
+        this.recipeCard.createRecipeCard()
       }
       // Init form
       this.search = new Search(recipes)
@@ -31,12 +33,14 @@ class App {
       this.searchForm.createSearchForm()
       this.search.init(recipes)
 
+      this.recipes = recipes
       this.listenLocalStorage()
     }
   }
 
   listenLocalStorage () {
     let originalSetItem = localStorage.setItem
+    const recipeCard = this.recipeCard
 
     localStorage.setItem = function (key, value) {
       const event = new Event('isSearchActive')
@@ -50,9 +54,10 @@ class App {
 
     const localStorageSetHandler = function (e) {
       if (e.key === 'isSearchActive' && e.value === true) {
-        console.log('Update recipe')
+        const idMatch = window.localStorage.getItem('recipeIdMatch')
+        recipeCard.updateRecipesCard(idMatch)
       } else {
-        console.log('Not updtae recipe')
+        console.log('SHOW ALL RECIPES')
       }
     }
 

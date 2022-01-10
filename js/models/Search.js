@@ -1,5 +1,4 @@
 import SearchEngine from '../search/SearchEngine.js'
-// import RecipeCard from '../templates/recipeCard.js'
 
 export default class Search {
   constructor (data) {
@@ -54,15 +53,15 @@ export default class Search {
       })
     }
 
+    const matchIdUnique = [...new Set(matchId)]
     const matchWordUnique = [...new Set(matchWord)]
     console.log('matchWordUnique :', matchWordUnique)
 
-    const matchIdUnique = [...new Set(matchId)]
-    console.log('matchIdUnique :', matchIdUnique)
-
     if (matchIdUnique.length > 0) {
+      window.localStorage.setItem('recipeIdMatch', matchIdUnique)
       this.setLocalStorageIsSearchActiveTo(true)
-    } else {
+    } else if (matchIdUnique.length <= 0) {
+      window.localStorage.removeItem('recipeIdMatch')
       this.setLocalStorageIsSearchActiveTo(false)
     }
   }

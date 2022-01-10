@@ -7,7 +7,7 @@ export default class RecipeCard extends Recipe {
 
   createRecipeCard () {
     const recipeCard = `
-      <article class="card" data-id="${this._id}">
+      <article id="recipeCard" class="card" data-id="${this._id}">
         <div class="card-img">
           <img src="./assets/img/300x300.jpg" alt="Photo de ${this._name}">
         </div>
@@ -45,5 +45,22 @@ export default class RecipeCard extends Recipe {
 
     const target = document.querySelector('.cards')
     target.innerHTML += recipeCard
+  }
+
+  updateRecipesCard (idArray) {
+    const id = Array.from(idArray.split(','))
+    const allCard = document.querySelectorAll('#recipeCard')
+
+    console.log('id', id)
+
+    for (let i = 0; i < allCard.length; i++) {
+      const card = allCard[i]
+      const cardId = card.dataset.id
+      const isMatch = id.find(el => el === cardId)
+
+      if (!isMatch) {
+        card.style.display = 'none'
+      }
+    }
   }
 }
