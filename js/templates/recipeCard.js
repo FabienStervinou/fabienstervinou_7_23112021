@@ -51,8 +51,6 @@ export default class RecipeCard extends Recipe {
     const id = Array.from(idArray.split(','))
     const allCard = document.querySelectorAll('#recipeCard')
 
-    console.log('id', id)
-
     for (let i = 0; i < allCard.length; i++) {
       const card = allCard[i]
       const cardId = card.dataset.id
@@ -61,6 +59,15 @@ export default class RecipeCard extends Recipe {
       if (!isMatch) {
         card.style.display = 'none'
       }
+    }
+  }
+
+  setAllRecipeCard () {
+    const allCard = document.querySelectorAll('#recipeCard')
+
+    for (let i = 0; i < allCard.length; i++) {
+      const card = allCard[i]
+      card.style.display = 'block'
     }
   }
 }

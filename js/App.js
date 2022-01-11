@@ -57,7 +57,7 @@ class App {
         const idMatch = window.localStorage.getItem('recipeIdMatch')
         recipeCard.updateRecipesCard(idMatch)
       } else {
-        console.log('SHOW ALL RECIPES')
+        recipeCard.showAllRecipeCard()
       }
     }
 
