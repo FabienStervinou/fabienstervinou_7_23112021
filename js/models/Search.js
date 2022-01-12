@@ -14,7 +14,10 @@ export default class Search {
   init () {
     const searchDOM = document.querySelector('#search')
     if (searchDOM) {
-      searchDOM.addEventListener('keyup', e => {
+      searchDOM.addEventListener('keyup', (e) => {
+        if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+          return false
+        }
         this.onSearchKeyUp(e)
       })
     }
@@ -31,6 +34,8 @@ export default class Search {
   onSearchKeyUp (e) {
     if (e.target.value.length >= 3) {
       this.updateRecipesSearch(e.target.value)
+    } else {
+      this.setLocalStorageIsSearchActiveTo(false)
     }
   }
 

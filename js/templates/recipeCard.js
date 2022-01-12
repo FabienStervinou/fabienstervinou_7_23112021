@@ -62,7 +62,7 @@ export default class RecipeCard extends Recipe {
     }
   }
 
-  setAllRecipeCard () {
+  showAllRecipeCard () {
     const allCard = document.querySelectorAll('#recipeCard')
 
     for (let i = 0; i < allCard.length; i++) {
