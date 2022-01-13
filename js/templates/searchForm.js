@@ -6,13 +6,12 @@ export default class SearchForm extends Search {
     super(data)
   }
 
-  createSearchForm () {
-    const filtersArray = [
-      'ingredient',
-      'appareil',
-      'ustensiles'
-    ]
+  init () {
+    this.createSearchForm()
+    this.filterTemplate = new FilterTemplate()
+  }
 
+  createSearchForm () {
     const searchFormString = `
     <form action="./index.html" id="form">
       <div class="search">
@@ -22,12 +21,6 @@ export default class SearchForm extends Search {
         </button>
       </div>
       <div class="filters">
-
-      ${filtersArray.map(filter => {
-        const filterTemplate = new FilterTemplate()
-        return filterTemplate.createFilterTemplate(filter)
-      })}
-
       </div>
     </form>
     `
