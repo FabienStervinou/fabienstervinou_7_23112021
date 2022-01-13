@@ -10,7 +10,7 @@ export default class SearchForm extends Search {
     const filtersArray = [
       'ingredient',
       'appareil',
-      'ustensile'
+      'ustensiles'
     ]
 
     const searchFormString = `
