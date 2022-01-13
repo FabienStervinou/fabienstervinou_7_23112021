@@ -2,6 +2,7 @@ import Api from './api/Api.js'
 import RecipeCard from './templates/recipeCard.js'
 import SearchForm from './templates/searchForm.js'
 import Search from './/models/Search.js'
+import Form from './/models/Form.js'
 
 class App {
   constructor () {
@@ -35,6 +36,9 @@ class App {
 
       this.recipes = recipes
       this.listenLocalStorage()
+
+      this.form = new Form()
+      this.form.init()
     }
   }
 
