@@ -60,7 +60,8 @@ class App {
       if (e.key === 'isSearchActive' && e.value === true) {
         const idMatch = window.localStorage.getItem('recipeIdMatch')
         recipeCard.updateRecipesCard(idMatch)
-      } else {
+      } else if (e.key === 'isSearchActive' && e.value === false) {
+        window.localStorage.removeItem('recipeIdMatch')
         recipeCard.showAllRecipeCard()
       }
     }
