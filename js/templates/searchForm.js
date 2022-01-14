@@ -9,6 +9,7 @@ export default class SearchForm extends Search {
   init () {
     this.createSearchForm()
     this.filterTemplate = new FilterTemplate()
+    this.filterTemplate.init()
   }
 
   createSearchForm () {
