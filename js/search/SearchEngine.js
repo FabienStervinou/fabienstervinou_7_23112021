@@ -49,4 +49,32 @@ export default class SearchEngine {
 
     this.dataSimplify = uniqueResultArray
   }
+
+  simplifyIngredient (data) {
+    let uniqueResultArray = []
+
+    for (let i = 0; i < data.length; i++) {
+      const recipe = data[i]
+
+      // Ingredient
+      let ingredientsArray = recipe.ingredients
+      let ingredientSimplify = []
+      for (let i = 0; i < ingredientsArray.length; i++) {
+        const ingredients = ingredientsArray[i]
+        let ingredient = ingredients.ingredient.replaceAll(',', ' ').replaceAll(':', ' ').replaceAll('°', ' ').replaceAll('\'', ' ').replaceAll('(', ' ').replaceAll(')', ' ').replaceAll('.', ' ').toLowerCase().split(' ')
+        let ingredientResult = ingredient.filter(word => word.length >= 3)
+        for (let i = 0; i < ingredientResult.length; i++) {
+          const item = ingredientResult[i]
+          ingredientSimplify.push(item)
+        }
+      }
+
+      // Remove duplicate value from Array
+      const toSimplify = [...ingredientSimplify]
+      uniqueResultArray.push(toSimplify)
+    }
+
+    const uniqueResult = [...new Set(uniqueResultArray.flat())]
+    return uniqueResult
+  }
 }
