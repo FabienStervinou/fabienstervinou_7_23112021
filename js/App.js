@@ -31,7 +31,7 @@ class App {
       // Init form
       this.search = new Search(recipes)
       this.searchForm = new SearchForm(recipes)
-      this.searchForm.createSearchForm()
+      this.searchForm.init()
       this.search.init(recipes)
 
       this.recipes = recipes
