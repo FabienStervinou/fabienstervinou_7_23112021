@@ -27,10 +27,12 @@ export default class Filter {
       const wrapper = document.createElement('div')
       const content = this.createFilterTemplate(type)
 
-      wrapper.classList.add('filter', `filter-${type}`)
+      wrapper.classList.add('filter', `filter-${type}`, `${type}`)
       wrapper.innerHTML = content
 
       target.insertAdjacentElement('beforeend', wrapper)
+
+      wrapper.addEventListener('click', this.onClickFilter)
     }
   }
 
@@ -50,6 +52,25 @@ export default class Filter {
 
     if (isSearchActive && recipeIdMatch) {
       console.log('recipeIdMatch :', recipeIdMatch)
+    }
+  }
+
+  onClickFilter (e) {
+    const arrow = this.querySelector('img')
+    const type = this.classList[2]
+    arrow.classList.toggle('open')
+
+    // Toggle other filter if open
+    const filters = document.querySelectorAll('.filter')
+
+    for (let i = 0; i < filters.length; i++) {
+      const element = filters[i]
+      const elementType = element.classList[2]
+      const elementArrow = element.querySelector('img')
+
+      if (elementType != type && elementArrow.classList == 'open') {
+        elementArrow.classList.remove(('open'))
+      }
     }
   }
 
