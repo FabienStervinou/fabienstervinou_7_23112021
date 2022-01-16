@@ -8,6 +8,7 @@ export default class Filter {
       'appareil',
       'ustensiles'
     ]
+    this.ingredientData = null
   }
 
   init () {
@@ -28,6 +29,7 @@ export default class Filter {
       const content = this.createFilterTemplate(type)
 
       wrapper.classList.add('filter', `filter-${type}`, `${type}`)
+      wrapper.dataset.active = 'false'
       wrapper.innerHTML = content
 
       target.insertAdjacentElement('beforeend', wrapper)
@@ -42,8 +44,34 @@ export default class Filter {
       <button class="filter-btn">
         <img src="./assets/img/arrow.svg" alt="Affiche tout les ${type}">
       </button>
+      <div class="break"></div>
+      <div id="items" class="filter-items ${type}" hidden></div>
     `
     return template
+  }
+
+  createItemsTemplate (itemsArray) {
+    const target = document.querySelector('[data-active="true"] > #items')
+
+    for (let i = 0; i < 30; i++) {
+      const item = itemsArray[i]
+      const content = this.createItemTemplate(item)
+
+      // target.insertAdjacentElement('beforeend', content)
+      target.insertAdjacentElement('beforeend', content)
+    }
+  }
+
+  createItemTemplate (item) {
+    const template = `<a href="#">${item}</a>`
+    const wrapper = document.createElement('div')
+    wrapper.setAttribute('id', 'item')
+    wrapper.setAttribute('class', 'filter-item')
+    wrapper.innerHTML = template
+
+    console.log(wrapper)
+
+    return wrapper
   }
 
   listenLocalStorage () {
@@ -55,26 +83,47 @@ export default class Filter {
     }
   }
 
-  onClickFilter (e) {
+  onClickFilter () {
     const arrow = this.querySelector('img')
+    const item = this.querySelector('#items')
     const type = this.classList[2]
-    arrow.classList.toggle('open')
-
-    // Toggle other filter if open
     const filters = document.querySelectorAll('.filter')
 
-    for (let i = 0; i < filters.length; i++) {
-      const element = filters[i]
-      const elementType = element.classList[2]
-      const elementArrow = element.querySelector('img')
+    arrow.classList.toggle('open')
+    item.toggleAttribute('hidden')
 
-      if (elementType != type && elementArrow.classList == 'open') {
-        elementArrow.classList.remove(('open'))
+    // Toggle data active attribute
+    if (this.dataset.active == 'true') {
+      this.dataset.active = 'false'
+    } else {
+      this.dataset.active = 'true'
+    }
+
+    // Toggle other filter if open
+    for (let i = 0; i < filters.length; i++) {
+      const filter = filters[i]
+      const filterType = filter.classList[2]
+      const filterArrow = filter.querySelector('img')
+      const items = filter.querySelector('#items')
+
+      if (filterType != type && filterArrow.classList == 'open') {
+        filterArrow.classList.remove(('open'))
+        filter.dataset.active = 'false'
       }
+
+      if (filterType != type) {
+        items.setAttribute('hidden', '')
+      }
+    }
+
+    if (this.ingredientData) {
+      this.createItemsTemplate(this.ingredientData)
     }
   }
 
   getFilterIngredient (data) {
-    console.log('getFilterIngredient', data)
+    this.ingredientData = data
+    console.log('this.ingredientData :', this.ingredientData)
+    this.createItemsTemplate(this.ingredientData)
   }
 }
