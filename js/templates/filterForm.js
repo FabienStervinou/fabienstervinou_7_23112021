@@ -52,12 +52,12 @@ export default class Filter {
 
   createItemsTemplate (itemsArray) {
     const target = document.querySelector('[data-active="true"] > #items')
+    target.innerHTML = ''
 
     for (let i = 0; i < 30; i++) {
       const item = itemsArray[i]
       const content = this.createItemTemplate(item)
 
-      // target.insertAdjacentElement('beforeend', content)
       target.insertAdjacentElement('beforeend', content)
     }
   }
@@ -123,7 +123,6 @@ export default class Filter {
 
   getFilterIngredient (data) {
     this.ingredientData = data
-    console.log('this.ingredientData :', this.ingredientData)
     this.createItemsTemplate(this.ingredientData)
   }
 }
