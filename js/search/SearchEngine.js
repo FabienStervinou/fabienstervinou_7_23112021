@@ -1,3 +1,5 @@
+import FilterForm from '../templates/filterForm.js'
+
 export default class SearchEngine {
   /**
    *
@@ -14,6 +16,7 @@ export default class SearchEngine {
   }
 
   simplifyData (data) {
+    console.log('<SearchEngine> simplifyData')
     const uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -48,9 +51,18 @@ export default class SearchEngine {
     }
 
     this.dataSimplify = uniqueResultArray
+
+    // Update filters data
+    const dataIngredient = this.simplifyIngredient(this.data)
+    const dataAppareil = this.simplifyAppareil(this.data)
+    const filterForm = new FilterForm()
+    // TODO: update methods name
+    filterForm.getFilterIngredient(dataIngredient, 'ingredient')
+    filterForm.getFilterIngredient(dataAppareil, 'appareil')
   }
 
   simplifyIngredient (data) {
+    console.log('<SearchEngine> simplifyIngredient')
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -75,6 +87,21 @@ export default class SearchEngine {
     }
 
     const uniqueResult = [...new Set(uniqueResultArray.flat())]
+    return uniqueResult
+  }
+
+  simplifyAppareil (data) {
+    console.log('<SearchEngine> simplifyAppareil')
+    let uniqueResultArray = []
+
+    for (let i = 0; i < data.length; i++) {
+      const recipe = data[i]
+      const appliance = recipe.appliance
+      uniqueResultArray.push(appliance)
+    }
+
+    const uniqueResult = [...new Set(uniqueResultArray.flat())]
+    console.log(uniqueResult)
     return uniqueResult
   }
 }
