@@ -1,12 +1,15 @@
 .filters {
   display: flex;
-  max-width: 570px;
+  flex-wrap: wrap;
 
   .filter {
     display: flex;
+    flex-wrap: wrap;
+    position: relative;
     margin: 20px 20px 0 0;
+    padding: 25px;
     border: none;
-    height: 70px;
+    width: 120px;
     color: $color-white;
     border-radius: $radius;
 
@@ -20,15 +23,15 @@
 
     &-ustensiles {
       background-color: $color-red;
+      margin-right: 0;
     }
 
     &-input {
       background: none;
       border: none;
       font-size: 18px;
-      width: 120px;
+      width: 80%;
       color: $color-white;
-      padding-left: 20px;
       
       &::placeholder {
         color: $color-white;
@@ -38,9 +41,9 @@
     &-btn {
       display: flex;
       align-items: center;
+      width: 20%;
       background: none;
       border: none;
-      padding-right: 20px;
 
       &:hover {
         cursor: pointer;
@@ -55,6 +58,46 @@
         &.open {
           transform: rotate(0deg);
         }
+      }
+    }
+
+    &-items {
+      background-color: $color-blue;
+      height: 10px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      visibility: hidden;
+
+      &.ingredient {
+        background-color: $color-blue;
+      }
+  
+      &.appareil {
+        background-color: $color-green;
+      }
+  
+      &.ustensiles {
+        background-color: $color-red;
+      }
+    } 
+
+    &[data-active="true"]  {
+      .filter-items {
+        visibility: visible;
+      }
+    } 
+
+    &-item {
+      font-size: 18px;
+      width: 120px;
+      background-color: $color-blue;
+
+      a {
+        color: $color-white;
       }
     }
   }
