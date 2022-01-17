@@ -55,10 +55,12 @@ export default class SearchEngine {
     // Update filters data
     const dataIngredient = this.simplifyIngredient(this.data)
     const dataAppareil = this.simplifyAppareil(this.data)
+    const dataUstensiles = this.simplifyUstensiles(this.data)
     const filterForm = new FilterForm()
     // TODO: update methods name
     filterForm.getFilterIngredient(dataIngredient, 'ingredient')
     filterForm.getFilterIngredient(dataAppareil, 'appareil')
+    filterForm.getFilterIngredient(dataUstensiles, 'ustensiles')
   }
 
   simplifyIngredient (data) {
@@ -91,7 +93,6 @@ export default class SearchEngine {
   }
 
   simplifyAppareil (data) {
-    console.log('<SearchEngine> simplifyAppareil')
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -101,7 +102,22 @@ export default class SearchEngine {
     }
 
     const uniqueResult = [...new Set(uniqueResultArray.flat())]
-    console.log(uniqueResult)
+    return uniqueResult
+  }
+
+  simplifyUstensiles (data) {
+    let uniqueResultArray = []
+
+    for (let i = 0; i < data.length; i++) {
+      const recipe = data[i]
+      const ustensils = recipe.ustensils
+      for (let i = 0; i < ustensils.length; i++) {
+        const ustensil = ustensils[i]
+        uniqueResultArray.push(ustensil)
+      }
+    }
+
+    const uniqueResult = [...new Set(uniqueResultArray.flat())]
     return uniqueResult
   }
 }
