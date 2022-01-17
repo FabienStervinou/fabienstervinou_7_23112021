@@ -9,6 +9,8 @@ export default class Filter {
       'ustensiles'
     ]
     this.ingredientData = null
+    this.appareilData = null
+    this.ustensilesData = null
   }
 
   init () {
@@ -50,15 +52,18 @@ export default class Filter {
     return template
   }
 
-  createItemsTemplate (itemsArray) {
-    const target = document.querySelector('[data-active="true"] > #items')
+  createItemsTemplate (itemsArray, type) {
+    const target = document.querySelector(`#items.${type}`)
+    console.log(target)
     if (target) {
       target.innerHTML = ''
       for (let i = 0; i < 30; i++) {
         const item = itemsArray[i]
-        const content = this.createItemTemplate(item)
+        if (item != undefined) {
+          const content = this.createItemTemplate(item)
 
-        target.insertAdjacentElement('beforeend', content)
+          target.insertAdjacentElement('beforeend', content)
+        }
       }
     }
   }
@@ -117,12 +122,26 @@ export default class Filter {
     }
 
     if (this.ingredientData) {
-      this.createItemsTemplate(this.ingredientData)
+      this.createItemsTemplate(this.ingredientData, 'ingredient')
     }
   }
 
-  getFilterIngredient (data) {
-    this.ingredientData = data
-    this.createItemsTemplate(this.ingredientData)
+  getFilterIngredient (data, type) {
+    switch (type) {
+      case 'ingredient':
+        this.ingredientData = data
+        this.createItemsTemplate(this.ingredientData, 'ingredient')
+        break
+
+      case 'appareil':
+        this.appareilData = data
+        this.createItemsTemplate(this.appareilData, 'appareil')
+        break
+
+      case 'ustensiles':
+        this.ustensilesData = data
+        this.createItemsTemplate(this.ustensilesData, 'ustensiles')
+        break
+    }
   }
 }
