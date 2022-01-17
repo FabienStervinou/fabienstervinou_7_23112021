@@ -52,24 +52,24 @@ export default class Filter {
 
   createItemsTemplate (itemsArray) {
     const target = document.querySelector('[data-active="true"] > #items')
-    target.innerHTML = ''
+    if (target) {
+      target.innerHTML = ''
+      for (let i = 0; i < 30; i++) {
+        const item = itemsArray[i]
+        const content = this.createItemTemplate(item)
 
-    for (let i = 0; i < 30; i++) {
-      const item = itemsArray[i]
-      const content = this.createItemTemplate(item)
-
-      target.insertAdjacentElement('beforeend', content)
+        target.insertAdjacentElement('beforeend', content)
+      }
     }
   }
 
   createItemTemplate (item) {
     const template = `<a href="#">${item}</a>`
     const wrapper = document.createElement('div')
+
     wrapper.setAttribute('id', 'item')
     wrapper.setAttribute('class', 'filter-item')
     wrapper.innerHTML = template
-
-    console.log(wrapper)
 
     return wrapper
   }
