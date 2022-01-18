@@ -143,10 +143,19 @@ main form {
 .filters .filter-items.ingredient {
   background-color: #3282F7;
 }
+.filters .filter-items.ingredient .filter-item {
+  background-color: #3282F7;
+}
 .filters .filter-items.appareil {
   background-color: #68D9A4;
 }
+.filters .filter-items.appareil .filter-item {
+  background-color: #68D9A4;
+}
 .filters .filter-items.ustensiles {
+  background-color: #ED6454;
+}
+.filters .filter-items.ustensiles .filter-item {
   background-color: #ED6454;
 }
 .filters .filter[data-active=true] .filter-items {
@@ -155,7 +164,6 @@ main form {
 .filters .filter-item {
   font-size: 18px;
   width: 120px;
-  background-color: #3282F7;
 }
 .filters .filter-item a {
   color: #ffffff;

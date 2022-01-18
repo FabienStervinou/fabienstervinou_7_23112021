@@ -74,14 +74,26 @@
 
       &.ingredient {
         background-color: $color-blue;
+
+        .filter-item {
+          background-color: $color-blue;
+        }
       }
   
       &.appareil {
         background-color: $color-green;
+
+        .filter-item {
+          background-color: $color-green;
+        }
       }
   
       &.ustensiles {
         background-color: $color-red;
+
+        .filter-item {
+          background-color: $color-red;
+        }
       }
     } 
 
@@ -94,7 +106,6 @@
     &-item {
       font-size: 18px;
       width: 120px;
-      background-color: $color-blue;
 
       a {
         color: $color-white;
