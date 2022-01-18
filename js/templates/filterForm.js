@@ -57,7 +57,7 @@ export default class Filter {
     console.log(target)
     if (target) {
       target.innerHTML = ''
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < itemsArray.length; i++) {
         const item = itemsArray[i]
         if (item != undefined) {
           const content = this.createItemTemplate(item)
@@ -126,7 +126,7 @@ export default class Filter {
     }
   }
 
-  getFilterIngredient (data, type) {
+  getFiltersData (data, type) {
     switch (type) {
       case 'ingredient':
         this.ingredientData = data

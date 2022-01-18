@@ -16,7 +16,6 @@ export default class SearchEngine {
   }
 
   simplifyData (data) {
-    console.log('<SearchEngine> simplifyData')
     const uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -57,14 +56,12 @@ export default class SearchEngine {
     const dataAppareil = this.simplifyAppareil(this.data)
     const dataUstensiles = this.simplifyUstensiles(this.data)
     const filterForm = new FilterForm()
-    // TODO: update methods name
-    filterForm.getFilterIngredient(dataIngredient, 'ingredient')
-    filterForm.getFilterIngredient(dataAppareil, 'appareil')
-    filterForm.getFilterIngredient(dataUstensiles, 'ustensiles')
+    filterForm.getFiltersData(dataIngredient, 'ingredient')
+    filterForm.getFiltersData(dataAppareil, 'appareil')
+    filterForm.getFiltersData(dataUstensiles, 'ustensiles')
   }
 
   simplifyIngredient (data) {
-    console.log('<SearchEngine> simplifyIngredient')
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {

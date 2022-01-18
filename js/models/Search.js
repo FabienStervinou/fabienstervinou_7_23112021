@@ -1,5 +1,4 @@
 import SearchEngine from '../search/SearchEngine.js'
-import FilterForm from '../templates/filterForm.js'
 
 export default class Search {
   constructor (data) {
@@ -72,9 +71,14 @@ export default class Search {
     }
 
     // Update filter
-    const dataIngredient = this.searchEngine.simplifyIngredient(this.data)
-    const filterForm = new FilterForm()
-    filterForm.getFilterIngredient(dataIngredient)
+    const dataFilter = []
+
+    for (let i = 0; i < matchIdUnique.length; i++) {
+      const id = matchIdUnique[i]
+      const result = this.data.filter(recipe => recipe.id == id)
+      dataFilter.push(result[0])
+    }
+    this.searchEngine = new SearchEngine(dataFilter)
   }
 
   setLocalStorageIsSearchActiveTo (value) {
