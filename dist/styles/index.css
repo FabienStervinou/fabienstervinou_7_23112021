@@ -236,4 +236,44 @@ main form {
   margin-right: 50px;
 }
 
+.tags {
+  display: flex;
+}
+.tags .tag {
+  display: flex;
+  padding: 10px 22px;
+  margin: 20px 20px 0 0;
+  border-radius: 5px;
+}
+.tags .tag-content {
+  color: #ffffff;
+  margin-right: 10px;
+  align-self: center;
+  text-transform: capitalize;
+}
+.tags .tag-close {
+  position: relative;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  height: 19px;
+  width: 19px;
+}
+.tags .tag-close svg {
+  position: absolute;
+  fill: #ffffff;
+  height: 15px;
+  width: 15px;
+  left: 2px;
+  top: 2px;
+}
+.tags .tag.ingredient {
+  background-color: #3282F7;
+}
+.tags .tag.appareil {
+  background-color: #68D9A4;
+}
+.tags .tag.ustensiles {
+  background-color: #ED6454;
+}
+
 /*# sourceMappingURL=index.css.map */

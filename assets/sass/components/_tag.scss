@@ -1,0 +1,48 @@
+.tags {
+  display: flex;
+  
+  .tag {
+    display: flex;
+    padding: 10px 22px;
+    margin: 20px 20px 0 0;
+    border-radius: $radius;
+
+    &-content {
+      color: $color-white;
+      margin-right: 10px;
+      align-self: center;
+      text-transform: capitalize;
+    }
+
+    &-close {
+      position: relative;
+      border: 3px solid $color-white;
+      border-radius: 50%;
+      height: 19px;
+      width: 19px;
+
+      svg {
+        position: absolute;
+        fill: $color-white;
+        height: 15px;
+        width: 15px;
+        left: 2px;
+        top: 2px;
+      }
+    }
+
+
+    &.ingredient {
+      background-color: $color-blue;
+    }
+
+    &.appareil {
+      background-color: $color-green;
+    }
+
+    &.ustensiles {
+      background-color: $color-red;
+    }
+
+  }
+}
