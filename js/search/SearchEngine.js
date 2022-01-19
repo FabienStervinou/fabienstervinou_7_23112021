@@ -8,11 +8,16 @@ export default class SearchEngine {
   constructor (data) {
     this.data = data
     this.dataSimplify = null
-    this.init(this.data)
+    this.dataIngredient = null
+    this.dataAppareil = null
+    this.dataUstensiles = null
+    this.form = document.querySelector('#form')
+    this.input = document.querySelector('#search')
   }
 
-  init (data) {
-    this.simplifyData(data)
+  init () {
+    this.simplifyData(this.data)
+    this.form.addEventListener('submit', this.searchInputListener.bind(this))
   }
 
   simplifyData (data) {
@@ -39,8 +44,17 @@ export default class SearchEngine {
         ingredientSimplify = [...ingredientResult]
       }
 
+      let ustensilsArray = recipe.ustensils
+      let ustensilsSimplify = []
+      for (let i = 0; i < ustensilsArray.length; i++) {
+        const ustensil = ustensilsArray[i]
+        let test = ustensil.split(' ')
+        let ustensilResult = test.filter(word => word.length >= 3)
+        ustensilsSimplify = [...ustensilResult]
+      }
+
       // Remove duplicate value from Array
-      const toSimplify = [...descriptionSimplify, ...nameSimplify, ...ingredientSimplify]
+      const toSimplify = [...descriptionSimplify, ...nameSimplify, ...ingredientSimplify, ...ustensilsSimplify]
       const uniqueResult = [...new Set(toSimplify)]
       const result = {
         id: recipe.id,
@@ -52,9 +66,9 @@ export default class SearchEngine {
     this.dataSimplify = uniqueResultArray
 
     // Update filters data
-    const dataIngredient = this.simplifyIngredient(this.data)
-    const dataAppareil = this.simplifyAppareil(this.data)
-    const dataUstensiles = this.simplifyUstensiles(this.data)
+    const dataIngredient = this.simplifyIngredient(data)
+    const dataAppareil = this.simplifyAppareil(data)
+    const dataUstensiles = this.simplifyUstensiles(data)
     const filterForm = new FilterForm()
     filterForm.getFiltersData(dataIngredient, 'ingredient')
     filterForm.getFiltersData(dataAppareil, 'appareil')
@@ -86,6 +100,7 @@ export default class SearchEngine {
     }
 
     const uniqueResult = [...new Set(uniqueResultArray.flat())]
+    this.dataIngredient = uniqueResult
     return uniqueResult
   }
 
@@ -95,10 +110,11 @@ export default class SearchEngine {
     for (let i = 0; i < data.length; i++) {
       const recipe = data[i]
       const appliance = recipe.appliance
-      uniqueResultArray.push(appliance)
+      uniqueResultArray.push(appliance.toLowerCase())
     }
 
     const uniqueResult = [...new Set(uniqueResultArray.flat())]
+    this.dataAppareil = uniqueResult
     return uniqueResult
   }
 
@@ -110,11 +126,12 @@ export default class SearchEngine {
       const ustensils = recipe.ustensils
       for (let i = 0; i < ustensils.length; i++) {
         const ustensil = ustensils[i]
-        uniqueResultArray.push(ustensil)
+        uniqueResultArray.push(ustensil.toLowerCase())
       }
     }
 
     const uniqueResult = [...new Set(uniqueResultArray.flat())]
+    this.dataUstensiles = uniqueResult
     return uniqueResult
   }
 }
