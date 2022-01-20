@@ -31,5 +31,14 @@ export default class Tag {
 
     const target = document.querySelector('#tags')
     target.insertAdjacentElement('afterbegin', tagElement)
+
+    // Add event for remove tag
+    const tagClose = tagElement.querySelector('.tag-close')
+    tagClose.addEventListener('click', this.removeTag)
+  }
+
+  removeTag (e) {
+    const toClose = e.target.closest('.tag')
+    toClose.remove()
   }
 }

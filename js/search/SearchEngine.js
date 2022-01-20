@@ -1,4 +1,5 @@
 import FilterForm from '../templates/filterForm.js'
+import Tag from '../templates/tagForm.js'
 
 export default class SearchEngine {
   /**
@@ -18,6 +19,23 @@ export default class SearchEngine {
   init () {
     this.simplifyData(this.data)
     this.form.addEventListener('submit', this.searchInputListener.bind(this))
+  }
+
+  searchInputListener (e) {
+    e.preventDefault()
+    const inputValue = this.input.value
+    const tag = new Tag()
+
+    if (this.dataIngredient.find(element => element == inputValue)) {
+      tag.createTag('ingredient', inputValue)
+    } else if (this.dataAppareil.find(element => element == inputValue)) {
+      tag.createTag('appareil', inputValue)
+    } else if (this.dataUstensiles.find(element => element == inputValue)) {
+      tag.createTag('ustensiles', inputValue)
+    }
+
+    // Remove input value
+    this.input.value = ''
   }
 
   simplifyData (data) {
