@@ -61,10 +61,12 @@ class App {
     }
 
     const localStorageSetHandler = function (e) {
+      const isTagActive = document.querySelector('#tags > .tag') != null
+
       if (e.key === 'isSearchActive' && e.value === true) {
         const idMatch = window.localStorage.getItem('recipeIdMatch')
         recipeCard.updateRecipesCard(idMatch)
-      } else if (e.key === 'isSearchActive' && e.value === false) {
+      } else if (e.key === 'isSearchActive' && e.value === false && isTagActive) {
         window.localStorage.removeItem('recipeIdMatch')
         recipeCard.showAllRecipeCard()
       }
