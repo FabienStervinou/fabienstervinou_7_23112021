@@ -5,6 +5,7 @@ export default class Search {
     this.isSearchActive = false
     this.data = data
     this.dataSimplify = null
+    this.searchEngine = null
   }
 
   /**
@@ -24,6 +25,7 @@ export default class Search {
 
     // Starting prepare local data for request
     this.searchEngine = new SearchEngine(this.data)
+    this.searchEngine.init()
     this.dataSimplify = this.searchEngine.dataSimplify
   }
 
@@ -32,7 +34,8 @@ export default class Search {
    * @param {Event} e
    */
   onSearchKeyUp (e) {
-    if (e.target.value.length >= 3) {
+    const isTagActive = document.querySelector('#tags > .tag') != null
+    if (e.target.value.length >= 3 || isTagActive) {
       this.updateRecipesSearch(e.target.value)
     } else {
       this.setLocalStorageIsSearchActiveTo(false)
@@ -44,7 +47,7 @@ export default class Search {
    * @param {String} value
    */
   updateRecipesSearch (value) {
-    const matchWord = []
+    // const matchWord = []
     const matchId = []
 
     for (let i = 0; i < this.dataSimplify.length; i++) {
@@ -52,18 +55,24 @@ export default class Search {
 
       element.simplify.forEach(word => {
         if (word.includes(value)) {
-          matchWord.push(word)
           matchId.push(element.id)
         }
       })
     }
 
+    const matchIdLocalStorage = window.localStorage.getItem('recipeIdMatch')
     const matchIdUnique = [...new Set(matchId)]
-    const matchWordUnique = [...new Set(matchWord)]
-    console.log('matchWordUnique :', matchWordUnique)
+
+    const matchIdLocalStorageArray = matchIdLocalStorage ? matchIdLocalStorage.split(',').map(Number) : false
+    const filteredArray = matchIdLocalStorageArray ? matchIdLocalStorageArray.filter(value => matchIdUnique.includes(value)) : false
 
     if (matchIdUnique.length > 0) {
-      window.localStorage.setItem('recipeIdMatch', matchIdUnique)
+      // If tag use filtered id list for local storage
+      if (filteredArray) {
+        window.localStorage.setItem('recipeIdMatch', filteredArray)
+      } else {
+        window.localStorage.setItem('recipeIdMatch', matchIdUnique)
+      }
       this.setLocalStorageIsSearchActiveTo(true)
     } else if (matchIdUnique.length <= 0) {
       window.localStorage.removeItem('recipeIdMatch')
@@ -78,7 +87,7 @@ export default class Search {
       const result = this.data.filter(recipe => recipe.id == id)
       dataFilter.push(result[0])
     }
-    this.searchEngine = new SearchEngine(dataFilter)
+    this.searchEngine.simplifyData(dataFilter)
   }
 
   setLocalStorageIsSearchActiveTo (value) {
