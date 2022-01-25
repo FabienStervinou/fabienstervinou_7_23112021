@@ -1,5 +1,6 @@
 import FilterForm from '../templates/filterForm.js'
 import Tag from '../templates/tagForm.js'
+import { replaceSpecialCharBy } from '../utils/utils.js'
 
 export default class SearchEngine {
   /**
@@ -45,7 +46,7 @@ export default class SearchEngine {
       const recipe = data[i]
 
       // Description
-      let descriptionArray = recipe.description.replaceAll(',', ' ').replaceAll(':', ' ').replaceAll('°', ' ').replaceAll('\'', ' ').replaceAll('(', ' ').replaceAll(')', ' ').replaceAll('.', ' ').toLowerCase().split(' ')
+      let descriptionArray = replaceSpecialCharBy(recipe.description, ' ').toLowerCase().split(' ')
       let descriptionSimplify = descriptionArray.filter(word => word.length >= 3)
 
       // Name
@@ -57,7 +58,7 @@ export default class SearchEngine {
       let ingredientSimplify = []
       for (let i = 0; i < ingredientsArray.length; i++) {
         const ingredients = ingredientsArray[i]
-        let ingredient = ingredients.ingredient.replaceAll(',', ' ').replaceAll(':', ' ').replaceAll('°', ' ').replaceAll('\'', ' ').replaceAll('(', ' ').replaceAll(')', ' ').replaceAll('.', ' ').toLowerCase().split(' ')
+        let ingredient = replaceSpecialCharBy(ingredients.ingredient, ' ').toLowerCase().split(' ')
         let ingredientResult = ingredient.filter(word => word.length >= 3)
         ingredientSimplify = [...ingredientResult]
       }
@@ -104,7 +105,7 @@ export default class SearchEngine {
       let ingredientSimplify = []
       for (let i = 0; i < ingredientsArray.length; i++) {
         const ingredients = ingredientsArray[i]
-        let ingredient = ingredients.ingredient.replaceAll(',', ' ').replaceAll(':', ' ').replaceAll('°', ' ').replaceAll('\'', ' ').replaceAll('(', ' ').replaceAll(')', ' ').replaceAll('.', ' ').toLowerCase().split(' ')
+        let ingredient = replaceSpecialCharBy(ingredients.ingredient, ' ').toLowerCase().split(' ')
         let ingredientResult = ingredient.filter(word => word.length >= 3)
         for (let i = 0; i < ingredientResult.length; i++) {
           const item = ingredientResult[i]

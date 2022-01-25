@@ -21,3 +21,10 @@ export const removeDataFromLocalStorage = (data, localItem) => {
     localStorage.setItem(`${localItem}`, JSON.stringify(a))
   }
 }
+
+export const replaceSpecialCharBy = (text, replace) => {
+  return text.replaceAll(',', replace).replaceAll(':', replace).replaceAll('°', replace).replaceAll('\'', replace).replaceAll('(', replace).replaceAll(')', replace).replaceAll('.', replace).replaceAll('%', replace)
+}
+
+// TODO:
+//   filter word length >= 3
