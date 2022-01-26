@@ -12,18 +12,20 @@ main {
         border-radius: $radius;
         border: none;
         padding: 22px;
+        padding-right: 40px;
         line-height: 22px;
         font-size: 18px;
+        text-overflow: ellipsis;
       }
 
       button {
         position: absolute;
-        height: 32px;
-        width: 32px;
+        height: 24px;
+        width: 24px;
         background: none;
         border: none;
         right: 24px;
-        top: 16px;
+        top: 20px;
 
         svg {
           position: relative;
@@ -38,5 +40,15 @@ main {
 @media screen and (min-width: 750px) {
   main {
     margin: 20px 100px 0;
+
+    form {
+      .search {
+        button {
+          height: 32px;
+          width: 32px;
+          top: 20px;
+        }
+      }
+    }
   }
 }

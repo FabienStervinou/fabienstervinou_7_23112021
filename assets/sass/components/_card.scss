@@ -1,12 +1,12 @@
 .cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 
   .card {
     max-width: 380px;
     min-height: 360px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     background-color: $color-grey1;
     border-radius: $radius;
 
@@ -73,8 +73,30 @@
       }
     }
   }
+}
 
-  .card:nth-child(odd) {
-    margin-right: 50px;
+@media screen and (min-width: 750px) {
+  .cards {
+    .card {
+      margin-bottom: 20px;
+    } 
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cards {
+    .card:nth-child(odd) {
+      margin-right: 20px;
+    }
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cards {
+    justify-content: space-between;
+
+    .card:nth-child(odd) {
+      margin-right: inherit;
+    }
   }
 }
