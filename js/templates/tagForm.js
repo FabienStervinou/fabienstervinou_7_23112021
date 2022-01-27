@@ -1,3 +1,5 @@
+import { saveDataToLocalStorage, removeDataFromLocalStorage } from '../utils/utils.js'
+
 export default class Tag {
   constructor () {
     this.type = null
@@ -35,10 +37,15 @@ export default class Tag {
     // Add event for remove tag
     const tagClose = tagElement.querySelector('.tag-close')
     tagClose.addEventListener('click', this.removeTag)
+
+    saveDataToLocalStorage(tag, 'tags')
   }
 
   removeTag (e) {
     const toClose = e.target.closest('.tag')
+    const tag = toClose.firstChild.nextSibling.innerText.toLowerCase()
+
     toClose.remove()
+    removeDataFromLocalStorage(tag, 'tags')
   }
 }
