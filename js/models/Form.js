@@ -4,11 +4,9 @@ export default class Form {
   }
 
   init () {
-    this.form.addEventListener('submit', (e) => {
-      console.log('e.keyIdentifier : ', e.keyIdentifier)
-      console.log('e.submitter : ', e.submitter)
-      e.preventDefault()
-      return false
-    })
+    // this.form.addEventListener('submit', (e) => {
+    //   e.preventDefault()
+    //   return false
+    // })
   }
 }

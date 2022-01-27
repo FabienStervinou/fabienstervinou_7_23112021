@@ -14,6 +14,7 @@ export default class Filter {
   }
 
   init () {
+    // console.log('<filterForm> init')
     let form = document.querySelector('#form')
 
     if (form) {
@@ -23,6 +24,7 @@ export default class Filter {
   }
 
   createAllFiltersTemplate () {
+    // console.log('<filterForm> createAllFiltersTemplate')
     const target = document.querySelector('.filters')
 
     for (let i = 0; i < this.filtersType.length; i++) {
@@ -41,6 +43,7 @@ export default class Filter {
   }
 
   createFilterTemplate (type) {
+    // console.log('<filterForm> createFilterTemplate')
     const template = `
       <input type="text" class="filter-input" placeholder="${capitalize(type)}">
       <button class="filter-btn">
@@ -53,8 +56,8 @@ export default class Filter {
   }
 
   createItemsTemplate (itemsArray, type) {
+    // console.log('<filterForm> createItemsTemplate')
     const target = document.querySelector(`#items.${type}`)
-    console.log(target)
     if (target) {
       target.innerHTML = ''
       for (let i = 0; i < itemsArray.length; i++) {
@@ -69,6 +72,7 @@ export default class Filter {
   }
 
   createItemTemplate (item) {
+    // console.log('<filterForm> createItemTemplate')
     const template = `<a href="#">${item}</a>`
     const wrapper = document.createElement('div')
 
@@ -80,15 +84,17 @@ export default class Filter {
   }
 
   listenLocalStorage () {
-    const isSearchActive = window.localStorage.getItem('isSearchActive')
-    const recipeIdMatch = window.localStorage.getItem('recipeIdMatch')
+    // console.log('<filterForm> listenLocalStorage')
+    // const isSearchActive = window.localStorage.getItem('isSearchActive')
+    // const recipeIdMatch = window.localStorage.getItem('recipeIdMatch')
 
-    if (isSearchActive && recipeIdMatch) {
-      console.log('recipeIdMatch :', recipeIdMatch)
-    }
+    // if (isSearchActive && recipeIdMatch) {
+    //   console.log('recipeIdMatch :', recipeIdMatch)
+    // }
   }
 
   onClickFilter () {
+    // console.log('<filterForm> onClickFilter')
     const arrow = this.querySelector('img')
     const item = this.querySelector('#items')
     const type = this.classList[2]
@@ -127,6 +133,7 @@ export default class Filter {
   }
 
   getFiltersData (data, type) {
+    // console.log('<filterForm> getFiltersData')
     switch (type) {
       case 'ingredient':
         this.ingredientData = data
