@@ -10,6 +10,7 @@ class App {
     this.recipesApi = new Api('../data/recipes.json')
     this.recipes = null
     this.recipeCard = null
+    this.search = null
   }
 
   async fetchRecipes () {
@@ -49,6 +50,7 @@ class App {
   listenLocalStorage () {
     let originalSetItem = localStorage.setItem
     const recipeCard = this.recipeCard
+    const search = this.search
 
     localStorage.setItem = function (key, value) {
       const event = new Event('isSearchActive')
@@ -70,6 +72,10 @@ class App {
         window.localStorage.removeItem('recipeIdMatch')
         recipeCard.showAllRecipeCard()
       }
+
+      if (e.key === 'tags') {
+        search.updateRecipesSearch()
+      }
     }
 
     document.addEventListener('isSearchActive', localStorageSetHandler, false)
@@ -78,3 +84,8 @@ class App {
 
 const app = new App()
 app.main()
+
+// reset localStorage on refresh page
+window.localStorage.removeItem('recipeIdMatch')
+window.localStorage.removeItem('isSearchActive')
+window.localStorage.removeItem('tags')
