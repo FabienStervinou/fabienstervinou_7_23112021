@@ -26,5 +26,16 @@ export const replaceSpecialCharBy = (text, replace) => {
   return text.replaceAll(',', replace).replaceAll(':', replace).replaceAll('°', replace).replaceAll('\'', replace).replaceAll('(', replace).replaceAll(')', replace).replaceAll('.', replace).replaceAll('%', replace)
 }
 
+export const getDuplicates = (arr) => {
+  let sortedArr = arr.slice().sort()
+  let results = []
+  for (let i = 0; i < sortedArr.length - 1; i++) {
+    if (sortedArr[i + 1] == sortedArr[i]) {
+      results.push(sortedArr[i])
+    }
+  }
+  return [...new Set(results)]
+}
+
 // TODO:
 //   filter word length >= 3
