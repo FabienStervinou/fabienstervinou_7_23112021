@@ -1,4 +1,5 @@
 import SearchEngine from '../search/SearchEngine.js'
+import { getDuplicates, toNumbers } from '../utils/utils.js'
 
 export default class Search {
   constructor (data) {
@@ -35,9 +36,9 @@ export default class Search {
    */
   onSearchKeyUp (e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
-    if (e.target.value.length >= 3 || isTagActive) {
+    if (e.target.value.length >= 3) {
       this.updateRecipesSearch(e.target.value)
-    } else {
+    } else if (!isTagActive) {
       this.setLocalStorageIsSearchActiveTo(false)
     }
   }
@@ -47,80 +48,62 @@ export default class Search {
    * @param {String} value
    */
   updateRecipesSearch (value) {
-    console.log('test updateRecipesSearch')
-    // const matchWord = []
-    const matchId = []
-    const tags = JSON.parse(window.localStorage.getItem('tags'))
-    const isUpdateByTag = value === undefined
+    const isTagActive = !!document.querySelector('.tag')
+    let matchId = []
+    let matchIdLocal = window.localStorage.getItem('matchId') ? toNumbers(window.localStorage.getItem('matchId').split(',')) : null
 
-    if (!isUpdateByTag) {
+    if (!isTagActive) {
       for (let i = 0; i < this.dataSimplify.length; i++) {
-        const element = this.dataSimplify[i]
+        const data = this.dataSimplify[i]
+        const dataSimplify = data.simplify
 
-        element.simplify.forEach(word => {
+        for (const word of dataSimplify) {
           if (word.includes(value)) {
-            matchId.push(element.id)
+            matchId.push(data.id)
           }
-        })
+        }
       }
-    }
+      window.localStorage.setItem('matchId', [...new Set(matchId)])
+    } else if (isTagActive) {
+      const tags = JSON.parse(window.localStorage.getItem('tags'))
+      const ids = []
+      let result
 
-    if (tags && isUpdateByTag) {
-      // console.log('test tags :', tags)
-      if (tags.length <= 1) {
+      for (const tag of tags) {
         for (let i = 0; i < this.dataSimplify.length; i++) {
-          const element = this.dataSimplify[i]
+          const data = this.dataSimplify[i]
+          const dataSimplify = data.simplify
 
-          element.simplify.forEach(word => {
-            if (word.includes(tags[0])) {
-              matchId.push(element.id)
-            }
-          })
-        }
-      } else if (tags.length > 1) {
-        // console.log('test multi tag')
-        for (let i = 0; i < tags.length; i++) {
-          const tag = tags[i]
-          for (let i = 0; i < this.dataSimplify.length; i++) {
-            const element = this.dataSimplify[i]
-
-            element.simplify.forEach(word => {
-              if (word.includes(tag)) {
-                matchId.push(element.id)
+          for (let i = 0; i < matchIdLocal.length; i++) {
+            const idLocal = matchIdLocal[i]
+            for (let i = 0; i < dataSimplify.length; i++) {
+              const word = dataSimplify[i]
+              if ((word.includes(tag) || word.includes(value)) && data.id == idLocal) {
+                ids.push(data.id)
               }
-            })
+            }
           }
         }
+        // Return only duplicate value
+        result = getDuplicates(ids)
+        matchId = result
+      }
+
+      if (result) {
+        window.localStorage.setItem('matchId', result)
       }
     }
 
-    // const matchIdLocalStorage = window.localStorage.getItem('recipeIdMatch')
-    const matchIdUnique = [...new Set(matchId)]
+    // TODO: ->
+    // Clean local storage if nothing match
+    // Make recipeCard visible
 
-    const matchIdTag = matchId.filter((element, index, array) => array.indexOf(element) !== index)
-    const matchIdTagDuplicate = [...new Set(matchIdTag)]
-    console.log('matchIdTagDuplicate :', matchIdTagDuplicate)
-    // console.log('log matchIdUnique :', matchIdUnique)
-
-    // const matchIdLocalStorageArray = matchIdLocalStorage ? matchIdLocalStorage.split(',').map(Number) : false
-    // const filteredArray = matchIdLocalStorageArray ? matchIdLocalStorageArray.filter(value => matchIdUnique.includes(value)) : false
-
-    if (matchIdUnique.length > 0 && !isUpdateByTag) {
-      window.localStorage.setItem('recipeIdMatch', matchIdUnique)
-
-      this.setLocalStorageIsSearchActiveTo(true)
-    } else if (matchIdUnique.length <= 0 && !isUpdateByTag) {
-      window.localStorage.removeItem('recipeIdMatch')
-      this.setLocalStorageIsSearchActiveTo(false)
-    }
-
-    // Update filter
+    // Update searchEngin data filter
     const dataFilter = []
-
-    for (let i = 0; i < matchIdUnique.length; i++) {
-      const id = matchIdUnique[i]
-      const result = this.data.filter(recipe => recipe.id == id)
-      dataFilter.push(result[0])
+    for (let i = 0; i < matchId.length; i++) {
+      const id = matchId[i]
+      const res = this.data.filter(recipe => recipe.id == id)
+      dataFilter.push(res[0])
     }
     this.searchEngine.simplifyData(dataFilter)
   }
