@@ -70,4 +70,12 @@ export default class RecipeCard extends Recipe {
       card.style.display = 'block'
     }
   }
+
+  showNoRecipeMatch () {
+    const target = document.querySelector('.cards')
+    const content = `
+      <h1 class="noCard">Nous ne trouvons pas de recette...<br />🔍🧑‍🍳</h1>
+    `
+    target.innerHTML = content
+  }
 }
