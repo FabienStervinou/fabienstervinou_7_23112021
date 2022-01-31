@@ -1,5 +1,5 @@
 import SearchEngine from '../search/SearchEngine.js'
-import { getDuplicates, toNumbers } from '../utils/utils.js'
+import { toNumbers } from '../utils/utils.js'
 
 export default class Search {
   constructor (data) {
@@ -64,28 +64,25 @@ export default class Search {
         }
       }
       window.localStorage.setItem('matchId', [...new Set(matchId)])
-    } else if (isTagActive) {
+    } else if (isTagActive && matchIdLocal) {
       const tags = JSON.parse(window.localStorage.getItem('tags'))
-      const ids = []
+      const valueId = []
       let result
 
-      for (const tag of tags) {
-        for (let i = 0; i < this.dataSimplify.length; i++) {
-          const data = this.dataSimplify[i]
-          const dataSimplify = data.simplify
+      for (let i = 0; i < matchIdLocal.length; i++) {
+        const idLocal = matchIdLocal[i]
 
-          for (let i = 0; i < matchIdLocal.length; i++) {
-            const idLocal = matchIdLocal[i]
-            for (let i = 0; i < dataSimplify.length; i++) {
-              const word = dataSimplify[i]
-              if ((word.includes(tag) || word.includes(value)) && data.id == idLocal) {
-                ids.push(data.id)
+        this.dataSimplify.forEach(element => {
+          if (element.id == idLocal && tags.length <= 2) {
+            for (let i = 0; i < element.simplify.length; i++) {
+              const word = element.simplify[i]
+              if (word.includes(value)) {
+                valueId.push(element.id)
               }
             }
           }
-        }
-        // Return only duplicate value
-        result = getDuplicates(ids)
+        })
+        result = [...new Set(valueId)]
         matchId = result
       }
 
@@ -94,8 +91,8 @@ export default class Search {
       }
     }
 
-    // TODO: ->
     // Clean local storage if nothing match
+    // return message "nothing match"
     // Make recipeCard visible
 
     // Update searchEngin data filter
@@ -105,7 +102,7 @@ export default class Search {
       const res = this.data.filter(recipe => recipe.id == id)
       dataFilter.push(res[0])
     }
-    this.searchEngine.simplifyData(dataFilter)
+    return this.searchEngine.simplifyData(dataFilter)
   }
 
   setLocalStorageIsSearchActiveTo (value) {
