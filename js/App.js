@@ -74,6 +74,8 @@ class App {
       const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
       if (e.key == 'matchId' && idsRecipesToUpdate) {
         recipeCard.updateRecipesCard(idsRecipesToUpdate)
+      } else if (e.key == 'matchId' && !idsRecipesToUpdate) {
+        recipeCard.showNoRecipeMatch()
       }
     }
 
