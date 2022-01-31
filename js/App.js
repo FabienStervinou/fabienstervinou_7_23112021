@@ -70,6 +70,11 @@ class App {
         window.localStorage.removeItem('recipeIdMatch')
         recipeCard.showAllRecipeCard()
       }
+
+      const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
+      if (e.key == 'matchId' && idsRecipesToUpdate) {
+        recipeCard.updateRecipesCard(idsRecipesToUpdate)
+      }
     }
 
     document.addEventListener('isSearchActive', localStorageSetHandler, false)
