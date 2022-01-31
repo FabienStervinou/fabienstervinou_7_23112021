@@ -37,5 +37,9 @@ export const getDuplicates = (arr) => {
   return [...new Set(results)]
 }
 
+export const toNumbers = (arr) => {
+  return arr.map(Number)
+}
+
 // TODO:
 //   filter word length >= 3
