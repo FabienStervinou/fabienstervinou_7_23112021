@@ -50,7 +50,6 @@ class App {
   listenLocalStorage () {
     let originalSetItem = localStorage.setItem
     const recipeCard = this.recipeCard
-    const search = this.search
 
     localStorage.setItem = function (key, value) {
       const event = new Event('isSearchActive')
@@ -66,15 +65,10 @@ class App {
       const isTagActive = document.querySelector('#tags > .tag') != null
 
       if (e.key === 'isSearchActive' && e.value === true) {
-        const idMatch = window.localStorage.getItem('recipeIdMatch')
-        recipeCard.updateRecipesCard(idMatch)
+        recipeCard.updateRecipesCard(window.localStorage.getItem('recipeIdMatch'))
       } else if (e.key === 'isSearchActive' && e.value === false && isTagActive) {
         window.localStorage.removeItem('recipeIdMatch')
         recipeCard.showAllRecipeCard()
-      }
-
-      if (e.key === 'tags') {
-        search.updateRecipesSearch()
       }
     }
 
@@ -85,7 +79,8 @@ class App {
 const app = new App()
 app.main()
 
-// reset localStorage on refresh page
+// reset localStorage on refresh page or use sessionStorage
 window.localStorage.removeItem('recipeIdMatch')
 window.localStorage.removeItem('isSearchActive')
 window.localStorage.removeItem('tags')
+window.localStorage.removeItem('matchId')
