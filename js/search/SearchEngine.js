@@ -155,19 +155,52 @@ export default class SearchEngine {
   }
 
   getIdByTag (tagArray, dataSimplify) {
-    const result = []
+    const tags = []
+
+    // Create tags Object
     tagArray.forEach(tag => {
-      console.log('log tag :', tag)
+      let tagObject = {}
+      let ids = []
       for (let i = 0; i < dataSimplify.length; i++) {
         const data = dataSimplify[i]
         for (let i = 0; i < data.simplify.length; i++) {
           const dataSimplify = data.simplify[i]
           if (dataSimplify.includes(tag)) {
-            result.push(data.id)
+            ids.push(data.id)
           }
         }
       }
+      tagObject.ids = ids
+      tagObject.name = tag
+      tags.push(tagObject)
     })
-    return result
+
+    // Find id match
+    if (tags && tags.length <= 1) {
+      console.log('log GetIdByTag', tags[0].ids)
+      return [...new Set(tags[0].ids)]
+    } else if (tags && tags.length > 1) {
+      let matchId = []
+      for (let i = 0; i < tags.length; i++) {
+        const tag = tags[i]
+
+        // Single tag
+        if (i == 0) {
+          console.log('log tag.ids :', tag.ids)
+          matchId.push(tag.ids)
+        }
+
+        // Multiple tag
+        for (let i = 0; i < tag.ids.length; i++) {
+          const id = tag.ids[i]
+          if (!matchId.includes(id)) {
+            let index = matchId.indexOf(id)
+            matchId.splice(index, 1)
+          }
+        }
+      }
+      console.log('log GetIdByTag', matchId)
+      return matchId
+    }
   }
 }
