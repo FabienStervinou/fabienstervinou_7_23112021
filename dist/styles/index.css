@@ -248,6 +248,10 @@ main form {
   max-height: 101px;
   overflow: hidden;
 }
+.cards .noCard {
+  margin-top: 50px;
+  text-align: center;
+}
 
 @media screen and (min-width: 750px) {
   .cards .card {
@@ -273,7 +277,7 @@ main form {
 .tags .tag {
   display: flex;
   padding: 10px 22px;
-  margin: 20px 20px 0 0;
+  margin: 10px 10px 0 0;
   border-radius: 5px;
 }
 .tags .tag-content {
@@ -305,6 +309,12 @@ main form {
 }
 .tags .tag.ustensiles {
   background-color: #ED6454;
+}
+
+@media screen and (min-width: 750px) {
+  .tags .tag {
+    margin: 20px 20px 0 0;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */
