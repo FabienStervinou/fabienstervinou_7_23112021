@@ -51,6 +51,7 @@ export default class Search {
   updateRecipesSearch (value) {
     console.log('log updateRecipesSearch')
     value.trim()
+
     const isTagActive = !!document.querySelector('.tag')
     let matchId = []
     let matchIdLocal = window.localStorage.getItem('matchId') ? toNumbers(window.localStorage.getItem('matchId').split(',')) : null
