@@ -17,9 +17,10 @@ export default class Search {
     const searchDOM = document.querySelector('#search')
     if (searchDOM) {
       searchDOM.addEventListener('keyup', (e) => {
-        if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
-          return false
-        }
+        // if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+        //   console.log('log event false ')
+        //   return false
+        // }
         this.onSearchKeyUp(e)
       })
     }
@@ -36,7 +37,7 @@ export default class Search {
    */
   onSearchKeyUp (e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
-    if (e.target.value.length >= 3) {
+    if (e.target.value.length >= 3 || e.keyCode == 13) {
       this.updateRecipesSearch(e.target.value)
     } else if (!isTagActive) {
       this.setLocalStorageIsSearchActiveTo(false)
@@ -48,6 +49,8 @@ export default class Search {
    * @param {String} value
    */
   updateRecipesSearch (value) {
+    console.log('log updateRecipesSearch')
+    value.trim()
     const isTagActive = !!document.querySelector('.tag')
     let matchId = []
     let matchIdLocal = window.localStorage.getItem('matchId') ? toNumbers(window.localStorage.getItem('matchId').split(',')) : null
@@ -68,6 +71,9 @@ export default class Search {
       const tags = JSON.parse(window.localStorage.getItem('tags'))
       const valueId = []
       let result
+
+      const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
+      console.log('log idTag :', idTag)
 
       for (let i = 0; i < matchIdLocal.length; i++) {
         const idLocal = matchIdLocal[i]
@@ -92,8 +98,6 @@ export default class Search {
     }
 
     // Clean local storage if nothing match
-    // return message "nothing match"
-    // Make recipeCard visible
 
     // Update searchEngin data filter
     const dataFilter = []
