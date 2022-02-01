@@ -153,4 +153,21 @@ export default class SearchEngine {
     this.dataUstensiles = uniqueResult
     return uniqueResult
   }
+
+  getIdByTag (tagArray, dataSimplify) {
+    const result = []
+    tagArray.forEach(tag => {
+      console.log('log tag :', tag)
+      for (let i = 0; i < dataSimplify.length; i++) {
+        const data = dataSimplify[i]
+        for (let i = 0; i < data.simplify.length; i++) {
+          const dataSimplify = data.simplify[i]
+          if (dataSimplify.includes(tag)) {
+            result.push(data.id)
+          }
+        }
+      }
+    })
+    return result
+  }
 }
