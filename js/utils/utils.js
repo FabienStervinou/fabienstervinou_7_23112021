@@ -27,7 +27,7 @@ export const replaceSpecialCharBy = (text, replace) => {
     .replaceAll(',', replace)
     .replaceAll(':', replace)
     .replaceAll('°', replace)
-    .replaceAll("'", replace)
+    .replaceAll('\'', replace)
     .replaceAll('(', replace)
     .replaceAll(')', replace)
     .replaceAll('.', replace)
@@ -35,13 +35,10 @@ export const replaceSpecialCharBy = (text, replace) => {
 }
 
 export const getDuplicates = (arr) => {
-  const result = arr => arr.filter( ( item, index ) => arr.indexOf( item ) !== index )
+  const result = arr => arr.filter((item, index) => arr.indexOf(item) !== index)
   return result(arr)
 }
 
 export const toNumbers = (arr) => {
   return arr.map(Number)
 }
-
-// TODO:
-//   filter word length >= 3
