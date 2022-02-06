@@ -2,7 +2,7 @@ import SearchEngine from '../search/SearchEngine.js'
 import { toNumbers } from '../utils/utils.js'
 
 export default class Search {
-  constructor (data) {
+  constructor(data) {
     this.isSearchActive = false
     this.data = data
     this.dataSimplify = null
@@ -13,7 +13,7 @@ export default class Search {
    *
    * @param {Array} data
    */
-  init () {
+  init() {
     const searchDOM = document.querySelector('#search')
     if (searchDOM) {
       searchDOM.addEventListener('keyup', (e) => {
@@ -35,7 +35,7 @@ export default class Search {
    *
    * @param {Event} e
    */
-  onSearchKeyUp (e) {
+  onSearchKeyUp(e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
     if (e.target.value.length >= 3 || e.keyCode == 13) {
       this.updateRecipesSearch(e.target.value)
@@ -48,13 +48,15 @@ export default class Search {
    *
    * @param {String} value
    */
-  updateRecipesSearch (value) {
+  updateRecipesSearch(value) {
     console.log('log updateRecipesSearch')
     value.trim()
 
     const isTagActive = !!document.querySelector('.tag')
     let matchId = []
-    let matchIdLocal = window.localStorage.getItem('matchId') ? toNumbers(window.localStorage.getItem('matchId').split(',')) : null
+    let matchIdLocal = window.localStorage.getItem('matchId')
+      ? toNumbers(window.localStorage.getItem('matchId').split(','))
+      : null
 
     if (!isTagActive) {
       for (let i = 0; i < this.dataSimplify.length; i++) {
@@ -74,12 +76,11 @@ export default class Search {
       let result
 
       const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
-      console.log('log idTag :', idTag)
 
       for (let i = 0; i < matchIdLocal.length; i++) {
         const idLocal = matchIdLocal[i]
 
-        this.dataSimplify.forEach(element => {
+        this.dataSimplify.forEach((element) => {
           if (element.id == idLocal && tags.length <= 2) {
             for (let i = 0; i < element.simplify.length; i++) {
               const word = element.simplify[i]
@@ -104,13 +105,13 @@ export default class Search {
     const dataFilter = []
     for (let i = 0; i < matchId.length; i++) {
       const id = matchId[i]
-      const res = this.data.filter(recipe => recipe.id == id)
+      const res = this.data.filter((recipe) => recipe.id == id)
       dataFilter.push(res[0])
     }
     return this.searchEngine.simplifyData(dataFilter)
   }
 
-  setLocalStorageIsSearchActiveTo (value) {
+  setLocalStorageIsSearchActiveTo(value) {
     window.localStorage.setItem('isSearchActive', value)
   }
 }
