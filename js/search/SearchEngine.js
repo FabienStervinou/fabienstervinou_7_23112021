@@ -1,13 +1,13 @@
 import FilterForm from '../templates/filterForm.js'
 import Tag from '../templates/tagForm.js'
-import { replaceSpecialCharBy } from '../utils/utils.js'
+import { replaceSpecialCharBy, getDuplicates } from '../utils/utils.js'
 
 export default class SearchEngine {
   /**
    *
    * @param {Array} data
    */
-  constructor (data) {
+  constructor(data) {
     this.data = data
     this.dataSimplify = null
     this.dataIngredient = null
@@ -17,21 +17,21 @@ export default class SearchEngine {
     this.input = document.querySelector('#search')
   }
 
-  init () {
+  init() {
     this.simplifyData(this.data)
     this.form.addEventListener('submit', this.searchInputListener.bind(this))
   }
 
-  searchInputListener (e) {
+  searchInputListener(e) {
     e.preventDefault()
     const inputValue = this.input.value
     const tag = new Tag()
 
-    if (this.dataIngredient.find(element => element == inputValue)) {
+    if (this.dataIngredient.find((element) => element == inputValue)) {
       tag.createTag('ingredient', inputValue)
-    } else if (this.dataAppareil.find(element => element == inputValue)) {
+    } else if (this.dataAppareil.find((element) => element == inputValue)) {
       tag.createTag('appareil', inputValue)
-    } else if (this.dataUstensiles.find(element => element == inputValue)) {
+    } else if (this.dataUstensiles.find((element) => element == inputValue)) {
       tag.createTag('ustensiles', inputValue)
     }
 
@@ -39,27 +39,33 @@ export default class SearchEngine {
     this.input.value = ''
   }
 
-  simplifyData (data) {
+  simplifyData(data) {
     const uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
       const recipe = data[i]
 
       // Description
-      let descriptionArray = replaceSpecialCharBy(recipe.description, ' ').toLowerCase().split(' ')
-      let descriptionSimplify = descriptionArray.filter(word => word.length >= 3)
+      let descriptionArray = replaceSpecialCharBy(recipe.description, ' ')
+        .toLowerCase()
+        .split(' ')
+      let descriptionSimplify = descriptionArray.filter(
+        (word) => word.length >= 3
+      )
 
       // Name
       let nameArray = recipe.name.toLowerCase().split(' ')
-      let nameSimplify = nameArray.filter(word => word.length >= 3)
+      let nameSimplify = nameArray.filter((word) => word.length >= 3)
 
       // Ingredient
       let ingredientsArray = recipe.ingredients
       let ingredientSimplify = []
       for (let i = 0; i < ingredientsArray.length; i++) {
         const ingredients = ingredientsArray[i]
-        let ingredient = replaceSpecialCharBy(ingredients.ingredient, ' ').toLowerCase().split(' ')
-        let ingredientResult = ingredient.filter(word => word.length >= 3)
+        let ingredient = replaceSpecialCharBy(ingredients.ingredient, ' ')
+          .toLowerCase()
+          .split(' ')
+        let ingredientResult = ingredient.filter((word) => word.length >= 3)
         ingredientSimplify = [...ingredientResult]
       }
 
@@ -68,16 +74,21 @@ export default class SearchEngine {
       for (let i = 0; i < ustensilsArray.length; i++) {
         const ustensil = ustensilsArray[i]
         let test = ustensil.split(' ')
-        let ustensilResult = test.filter(word => word.length >= 3)
+        let ustensilResult = test.filter((word) => word.length >= 3)
         ustensilsSimplify = [...ustensilResult]
       }
 
       // Remove duplicate value from Array
-      const toSimplify = [...descriptionSimplify, ...nameSimplify, ...ingredientSimplify, ...ustensilsSimplify]
+      const toSimplify = [
+        ...descriptionSimplify,
+        ...nameSimplify,
+        ...ingredientSimplify,
+        ...ustensilsSimplify,
+      ]
       const uniqueResult = [...new Set(toSimplify)]
       const result = {
         id: recipe.id,
-        simplify: uniqueResult
+        simplify: uniqueResult,
       }
       uniqueResultArray.push(result)
     }
@@ -94,7 +105,7 @@ export default class SearchEngine {
     filterForm.getFiltersData(dataUstensiles, 'ustensiles')
   }
 
-  simplifyIngredient (data) {
+  simplifyIngredient(data) {
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -105,8 +116,10 @@ export default class SearchEngine {
       let ingredientSimplify = []
       for (let i = 0; i < ingredientsArray.length; i++) {
         const ingredients = ingredientsArray[i]
-        let ingredient = replaceSpecialCharBy(ingredients.ingredient, ' ').toLowerCase().split(' ')
-        let ingredientResult = ingredient.filter(word => word.length >= 3)
+        let ingredient = replaceSpecialCharBy(ingredients.ingredient, ' ')
+          .toLowerCase()
+          .split(' ')
+        let ingredientResult = ingredient.filter((word) => word.length >= 3)
         for (let i = 0; i < ingredientResult.length; i++) {
           const item = ingredientResult[i]
           ingredientSimplify.push(item)
@@ -123,7 +136,7 @@ export default class SearchEngine {
     return uniqueResult
   }
 
-  simplifyAppareil (data) {
+  simplifyAppareil(data) {
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -137,7 +150,7 @@ export default class SearchEngine {
     return uniqueResult
   }
 
-  simplifyUstensiles (data) {
+  simplifyUstensiles(data) {
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -154,11 +167,11 @@ export default class SearchEngine {
     return uniqueResult
   }
 
-  getIdByTag (tagArray, dataSimplify) {
+  getIdByTag(tagArray, dataSimplify) {
     const tags = []
 
     // Create tags Object
-    tagArray.forEach(tag => {
+    tagArray.forEach((tag) => {
       let tagObject = {}
       let ids = []
       for (let i = 0; i < dataSimplify.length; i++) {
@@ -170,14 +183,13 @@ export default class SearchEngine {
           }
         }
       }
-      tagObject.ids = ids
+      tagObject.ids = [...new Set(ids)]
       tagObject.name = tag
       tags.push(tagObject)
     })
 
     // Find id match
     if (tags && tags.length <= 1) {
-      console.log('log GetIdByTag', tags[0].ids)
       return [...new Set(tags[0].ids)]
     } else if (tags && tags.length > 1) {
       let matchId = []
@@ -185,21 +197,18 @@ export default class SearchEngine {
         const tag = tags[i]
 
         // Single tag
-        if (i == 0) {
-          console.log('log tag.ids :', tag.ids)
-          matchId.push(tag.ids)
+        if (i === 0) {
+          matchId = tag.ids
         }
 
         // Multiple tag
-        for (let i = 0; i < tag.ids.length; i++) {
-          const id = tag.ids[i]
-          if (!matchId.includes(id)) {
-            let index = matchId.indexOf(id)
-            matchId.splice(index, 1)
-          }
+        if (i >= 1) {
+          matchId = matchId.concat(tag.ids)
+          let result = getDuplicates(matchId)
+          matchId = [...new Set( result )]
+          matchId.sort()
         }
       }
-      console.log('log GetIdByTag', matchId)
       return matchId
     }
   }
