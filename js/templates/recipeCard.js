@@ -72,10 +72,16 @@ export default class RecipeCard extends Recipe {
   }
 
   showNoRecipeMatch () {
-    const target = document.querySelector('.cards')
-    const content = `
-      <h1 class="noCard">Nous ne trouvons pas de recette...<br />🔍🧑‍🍳</h1>
-    `
-    target.innerHTML = content
+    const wrapper = document.querySelector('.cards')
+    const content = wrapper.querySelector('.noCard')
+    const allCard = document.querySelectorAll('#recipeCard')
+
+    // Set all card display none
+    for (let i = 0; i < allCard.length; i++) {
+      const card = allCard[i]
+      card.style.display = 'none'
+    }
+
+    content.style.display = 'block'
   }
 }
