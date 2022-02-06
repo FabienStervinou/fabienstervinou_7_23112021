@@ -49,7 +49,6 @@ export default class Search {
    * @param {String} value
    */
   updateRecipesSearch(value) {
-    console.log('log updateRecipesSearch')
     value.trim()
 
     const isTagActive = !!document.querySelector('.tag')
