@@ -55,9 +55,18 @@ export default class RecipeCard extends Recipe {
       const card = allCard[i]
       const cardId = card.dataset.id
       const isMatch = id.find(el => el === cardId)
+      const noCardMessage = document.querySelector('.noCard')
+      let oneCardVisible = false
 
       if (!isMatch) {
         card.style.display = 'none'
+      } else {
+        card.style.display = 'block'
+        oneCardVisible = true
+      }
+
+      if (oneCardVisible) {
+        noCardMessage.style.display = 'none'
       }
     }
   }
