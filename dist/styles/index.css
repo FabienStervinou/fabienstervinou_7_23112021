@@ -125,6 +125,7 @@ main form {
 .filters .filter-btn {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   width: 20%;
   background: none;
   border: none;
@@ -141,14 +142,14 @@ main form {
   transform: rotate(0deg);
 }
 .filters .filter-items {
-  background-color: #3282F7;
-  height: 10px;
-  width: 100%;
   position: absolute;
-  left: 0;
-  bottom: 0;
   display: flex;
   flex-direction: column;
+  flex-flow: wrap;
+  width: calc(100% - 40px);
+  padding: 0 20px 20px 20px;
+  left: 0;
+  top: 68px;
   visibility: hidden;
 }
 .filters .filter-items.ingredient {
@@ -169,12 +170,16 @@ main form {
 .filters .filter-items.ustensiles .filter-item {
   background-color: #ED6454;
 }
+.filters .filter[data-active=true] {
+  width: 380px;
+}
 .filters .filter[data-active=true] .filter-items {
   visibility: visible;
 }
 .filters .filter-item {
   font-size: 18px;
-  width: 120px;
+  padding: 5px;
+  width: calc(33.33% - 10px);
 }
 .filters .filter-item a {
   color: #ffffff;
@@ -183,6 +188,9 @@ main form {
 @media screen and (min-width: 750px) {
   .filters .filter {
     margin: 20px 20px 0 0;
+  }
+  .filters .filter:last-of-type {
+    margin: 20px 0 0 0;
   }
 }
 .cards {
@@ -250,7 +258,7 @@ main form {
 }
 .cards .noCard {
   display: none;
-  margin-top: 50px;
+  margin: 50px auto 0;
   text-align: center;
 }
 
@@ -274,6 +282,7 @@ main form {
 }
 .tags {
   display: flex;
+  flex-flow: wrap;
 }
 .tags .tag {
   display: flex;
