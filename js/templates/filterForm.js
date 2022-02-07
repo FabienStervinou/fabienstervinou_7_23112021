@@ -1,5 +1,6 @@
 
 import { capitalize } from '../utils/utils.js'
+import TagForm from './tagForm.js'
 
 export default class Filter {
   constructor () {
@@ -80,6 +81,7 @@ export default class Filter {
     wrapper.setAttribute('class', 'filter-item')
     wrapper.innerHTML = template
 
+    wrapper.addEventListener('click', this.onClickFilterItem, event, false)
     return wrapper
   }
 
@@ -130,6 +132,13 @@ export default class Filter {
     if (this.ingredientData) {
       this.createItemsTemplate(this.ingredientData, 'ingredient')
     }
+  }
+
+  onClickFilterItem () {
+    const tagForm = new TagForm()
+    const item = this.firstChild.innerHTML
+    const type = this.closest('.filter-items').classList[1]
+    tagForm.createTag(type, item)
   }
 
   getFiltersData (data, type) {
