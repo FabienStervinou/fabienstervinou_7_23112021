@@ -7,7 +7,7 @@ export default class SearchEngine {
    *
    * @param {Array} data
    */
-  constructor(data) {
+  constructor (data) {
     this.data = data
     this.dataSimplify = null
     this.dataIngredient = null
@@ -17,12 +17,12 @@ export default class SearchEngine {
     this.input = document.querySelector('#search')
   }
 
-  init() {
+  init () {
     this.simplifyData(this.data)
     this.form.addEventListener('submit', this.searchInputListener.bind(this))
   }
 
-  searchInputListener(e) {
+  searchInputListener (e) {
     e.preventDefault()
     const inputValue = this.input.value
     const tag = new Tag()
@@ -39,7 +39,7 @@ export default class SearchEngine {
     this.input.value = ''
   }
 
-  simplifyData(data) {
+  simplifyData (data) {
     const uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -83,12 +83,12 @@ export default class SearchEngine {
         ...descriptionSimplify,
         ...nameSimplify,
         ...ingredientSimplify,
-        ...ustensilsSimplify,
+        ...ustensilsSimplify
       ]
       const uniqueResult = [...new Set(toSimplify)]
       const result = {
         id: recipe.id,
-        simplify: uniqueResult,
+        simplify: uniqueResult
       }
       uniqueResultArray.push(result)
     }
@@ -105,7 +105,7 @@ export default class SearchEngine {
     filterForm.getFiltersData(dataUstensiles, 'ustensiles')
   }
 
-  simplifyIngredient(data) {
+  simplifyIngredient (data) {
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -136,7 +136,7 @@ export default class SearchEngine {
     return uniqueResult
   }
 
-  simplifyAppareil(data) {
+  simplifyAppareil (data) {
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -150,7 +150,7 @@ export default class SearchEngine {
     return uniqueResult
   }
 
-  simplifyUstensiles(data) {
+  simplifyUstensiles (data) {
     let uniqueResultArray = []
 
     for (let i = 0; i < data.length; i++) {
@@ -167,7 +167,7 @@ export default class SearchEngine {
     return uniqueResult
   }
 
-  getIdByTag(tagArray, dataSimplify) {
+  getIdByTag (tagArray, dataSimplify) {
     const tags = []
 
     // Create tags Object
@@ -205,7 +205,7 @@ export default class SearchEngine {
         if (i >= 1) {
           matchId = matchId.concat(tag.ids)
           let result = getDuplicates(matchId)
-          matchId = [...new Set( result )]
+          matchId = [...new Set(result)]
           matchId.sort()
         }
       }

@@ -2,7 +2,7 @@ import SearchEngine from '../search/SearchEngine.js'
 import { toNumbers } from '../utils/utils.js'
 
 export default class Search {
-  constructor(data) {
+  constructor (data) {
     this.isSearchActive = false
     this.data = data
     this.dataSimplify = null
@@ -13,14 +13,10 @@ export default class Search {
    *
    * @param {Array} data
    */
-  init() {
+  init () {
     const searchDOM = document.querySelector('#search')
     if (searchDOM) {
       searchDOM.addEventListener('keyup', (e) => {
-        // if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
-        //   console.log('log event false ')
-        //   return false
-        // }
         this.onSearchKeyUp(e)
       })
     }
@@ -35,7 +31,7 @@ export default class Search {
    *
    * @param {Event} e
    */
-  onSearchKeyUp(e) {
+  onSearchKeyUp (e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
     if (e.target.value.length >= 3 || e.keyCode == 13) {
       this.updateRecipesSearch(e.target.value)
@@ -48,9 +44,10 @@ export default class Search {
    *
    * @param {String} value
    */
-  updateRecipesSearch(value) {
-    console.log('log     updateRecipesSearch')
-    value.trim()
+  updateRecipesSearch (value) {
+    if (value) {
+      value.trim()
+    }
 
     const isTagActive = !!document.querySelector('.tag')
     let matchId = []
@@ -59,6 +56,7 @@ export default class Search {
       : null
 
     if (!isTagActive) {
+      // console.log('1')
       for (let i = 0; i < this.dataSimplify.length; i++) {
         const data = this.dataSimplify[i]
         const dataSimplify = data.simplify
@@ -71,6 +69,7 @@ export default class Search {
       }
       window.localStorage.setItem('matchId', [...new Set(matchId)])
     } else if (isTagActive && matchIdLocal) {
+      // console.log('2')
       const tags = JSON.parse(window.localStorage.getItem('tags'))
       const valueId = []
       let result
@@ -94,8 +93,8 @@ export default class Search {
         matchId = result
       }
 
-      if (result) {
-        window.localStorage.setItem('matchId', result)
+      if (idTag) {
+        window.localStorage.setItem('matchId', idTag)
       }
     }
 
@@ -111,7 +110,7 @@ export default class Search {
     return this.searchEngine.simplifyData(dataFilter)
   }
 
-  setLocalStorageIsSearchActiveTo(value) {
+  setLocalStorageIsSearchActiveTo (value) {
     window.localStorage.setItem('isSearchActive', value)
   }
 }
