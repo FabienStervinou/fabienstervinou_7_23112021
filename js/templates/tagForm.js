@@ -4,16 +4,11 @@ export default class Tag {
   constructor () {
     this.type = null
     this.tag = null
-    this.wrapper = null
+    this.wrapper = document.querySelector('#tags')
   }
 
   init () {
-    this.wrapper = document.createElement('div')
-    this.wrapper.setAttribute('class', 'tags')
-    this.wrapper.setAttribute('id', 'tags')
 
-    const target = document.querySelector('.search')
-    target.insertAdjacentElement('afterend', this.wrapper)
   }
 
   createTag (type, tag) {
@@ -32,6 +27,7 @@ export default class Tag {
     tagElement.innerHTML = tagContent
 
     const target = document.querySelector('#tags')
+
     target.insertAdjacentElement('afterbegin', tagElement)
 
     // Add event for remove tag
