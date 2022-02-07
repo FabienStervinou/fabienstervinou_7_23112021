@@ -93,12 +93,11 @@ main form {
 }
 .filters .filter {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   position: relative;
   margin: 10px 10px 0 0;
-  padding: 25px;
   border: none;
-  width: 120px;
+  min-width: 120px;
   color: #ffffff;
   border-radius: 5px;
 }
@@ -117,6 +116,7 @@ main form {
   border: none;
   font-size: 18px;
   width: 80%;
+  padding: 25px 0 25px 25px;
   color: #ffffff;
 }
 .filters .filter-input::placeholder {
@@ -125,7 +125,7 @@ main form {
 .filters .filter-btn {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   width: 20%;
   background: none;
   border: none;
@@ -172,6 +172,12 @@ main form {
 }
 .filters .filter[data-active=true] {
   width: 380px;
+}
+.filters .filter[data-active=true] .filter-input {
+  opacity: 0.5;
+}
+.filters .filter[data-active=true] .filter-input::placeholder {
+  content: "test";
 }
 .filters .filter[data-active=true] .filter-items {
   visibility: visible;
