@@ -38,6 +38,10 @@ export default class Tag {
     const tagClose = tagElement.querySelector('.tag-close')
     tagClose.addEventListener('click', this.removeTag)
 
+    // Remove null element from localStorage
+    if (JSON.parse(localStorage.getItem('tags')) == 'null') {
+      removeDataFromLocalStorage('null', 'tags')
+    }
     saveDataToLocalStorage(tag, 'tags')
   }
 
@@ -47,5 +51,8 @@ export default class Tag {
 
     toClose.remove()
     removeDataFromLocalStorage(tag, 'tags')
+    if (!localStorage.getItem('tags')) {
+      saveDataToLocalStorage('null', 'tags')
+    }
   }
 }
