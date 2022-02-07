@@ -3,7 +3,6 @@ import RecipeCard from './templates/recipeCard.js'
 import SearchForm from './templates/searchForm.js'
 import Search from './/models/Search.js'
 import Form from './/models/Form.js'
-import Tag from './templates/tagForm.js'
 
 class App {
   constructor () {
@@ -41,9 +40,6 @@ class App {
 
       this.form = new Form()
       this.form.init()
-
-      this.tag = new Tag()
-      this.tag.init()
     }
   }
 
@@ -70,6 +66,7 @@ class App {
       // TAG event
       if (e.key === 'tags') {
         if (isTagActive) {
+          console.log('tag update')
           search.updateRecipesSearch()
         } else {
           recipeCard.showNoRecipeMatch()
@@ -87,7 +84,6 @@ class App {
 
       const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
       if (e.key == 'matchId' && idsRecipesToUpdate) {
-        console.log('update recipe card', idsRecipesToUpdate)
         recipeCard.updateRecipesCard(idsRecipesToUpdate)
       } else if (e.key == 'matchId' && !idsRecipesToUpdate) {
         recipeCard.showNoRecipeMatch()
