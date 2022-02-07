@@ -56,7 +56,6 @@ export default class Search {
       : null
 
     if (!isTagActive) {
-      // console.log('1')
       for (let i = 0; i < this.dataSimplify.length; i++) {
         const data = this.dataSimplify[i]
         const dataSimplify = data.simplify
@@ -69,7 +68,6 @@ export default class Search {
       }
       window.localStorage.setItem('matchId', [...new Set(matchId)])
     } else if (isTagActive && matchIdLocal) {
-      // console.log('2')
       const tags = JSON.parse(window.localStorage.getItem('tags'))
       const valueId = []
       let result
@@ -96,14 +94,26 @@ export default class Search {
       if (idTag) {
         window.localStorage.setItem('matchId', idTag)
       }
+    } else if (isTagActive && !matchIdLocal) {
+      const tags = JSON.parse(window.localStorage.getItem('tags'))
+      const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
+
+      if (idTag) {
+        window.localStorage.setItem('matchId', idTag)
+      }
     }
 
-    // Clean local storage if nothing match
+    // TODO:Clean local storage if nothing match
 
     // Update searchEngin data filter
     const dataFilter = []
-    for (let i = 0; i < matchId.length; i++) {
-      const id = matchId[i]
+    const matchIdFilter = Array.from(window.localStorage.getItem('matchId').split(','))
+    const matchIdFilterResult = matchIdFilter.map((x) => {
+      return parseInt(x, 10)
+    })
+
+    for (let i = 0; i < matchIdFilterResult.length; i++) {
+      const id = matchIdFilterResult[i]
       const res = this.data.filter((recipe) => recipe.id == id)
       dataFilter.push(res[0])
     }
