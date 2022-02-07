@@ -141,6 +141,12 @@ export default class Filter {
     tagForm.createTag(type, item)
   }
 
+  updateFiltersData (dataIngredient, dataAppareil, dataUstensiles) {
+    this.getFiltersData(dataIngredient, 'ingredient')
+    this.getFiltersData(dataAppareil, 'appareil')
+    this.getFiltersData(dataUstensiles, 'ustensiles')
+  }
+
   getFiltersData (data, type) {
     // console.log('<filterForm> getFiltersData')
     switch (type) {
