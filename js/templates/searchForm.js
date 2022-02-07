@@ -21,8 +21,8 @@ export default class SearchForm extends Search {
           <img src="./assets/img/search.svg" alt="Bouton de recherche" ></img>
         </button>
       </div>
-      <div class="filters">
-      </div>
+      <div id="tags" class="tags"></div>
+      <div class="filters"></div>
     </form>
     `
 
