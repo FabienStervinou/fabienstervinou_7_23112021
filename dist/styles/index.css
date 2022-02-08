@@ -118,6 +118,7 @@ main form {
   width: 80%;
   padding: 25px 0 25px 25px;
   color: #ffffff;
+  outline: none;
 }
 .filters .filter-input::placeholder {
   color: #ffffff;
