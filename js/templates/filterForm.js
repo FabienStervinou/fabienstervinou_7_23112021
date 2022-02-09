@@ -15,7 +15,6 @@ export default class Filter {
   }
 
   init () {
-    // console.log('<filterForm> init')
     let form = document.querySelector('#form')
 
     if (form) {
@@ -25,7 +24,6 @@ export default class Filter {
   }
 
   createAllFiltersTemplate () {
-    // console.log('<filterForm> createAllFiltersTemplate')
     const target = document.querySelector('.filters')
 
     for (let i = 0; i < this.filtersType.length; i++) {
@@ -40,11 +38,11 @@ export default class Filter {
       target.insertAdjacentElement('beforeend', wrapper)
 
       wrapper.addEventListener('click', this.onClickFilter)
+      wrapper.addEventListener('keyup', this.onKeyUpFilter)
     }
   }
 
   createFilterTemplate (type) {
-    // console.log('<filterForm> createFilterTemplate')
     const template = `
       <input type="text" class="filter-input" placeholder="${capitalize(type)}">
       <button class="filter-btn">
@@ -57,7 +55,6 @@ export default class Filter {
   }
 
   createItemsTemplate (itemsArray, type) {
-    // console.log('<filterForm> createItemsTemplate')
     const target = document.querySelector(`#items.${type}`)
     if (target) {
       target.innerHTML = ''
@@ -73,7 +70,6 @@ export default class Filter {
   }
 
   createItemTemplate (item) {
-    // console.log('<filterForm> createItemTemplate')
     const template = `<a href="#">${item}</a>`
     const wrapper = document.createElement('div')
 
@@ -86,7 +82,6 @@ export default class Filter {
   }
 
   listenLocalStorage () {
-    // console.log('<filterForm> listenLocalStorage')
     // const isSearchActive = window.localStorage.getItem('isSearchActive')
     // const recipeIdMatch = window.localStorage.getItem('recipeIdMatch')
 
@@ -95,8 +90,21 @@ export default class Filter {
     // }
   }
 
+  onKeyUpFilter (event) {
+    const filters = this.querySelectorAll('#item')
+    const word = event.target.value
+
+    for (let i = 0; i < filters.length; i++) {
+      const item = filters[i]
+      if (!item.firstChild.innerHTML.match(word)) {
+        item.style.display = 'none'
+      } else {
+        item.style.display = 'block'
+      }
+    }
+  }
+
   onClickFilter () {
-    // console.log('<filterForm> onClickFilter')
     const arrow = this.querySelector('img')
     const item = this.querySelector('#items')
     const type = this.classList[2]
@@ -148,7 +156,6 @@ export default class Filter {
   }
 
   getFiltersData (data, type) {
-    // console.log('<filterForm> getFiltersData')
     switch (type) {
       case 'ingredient':
         this.ingredientData = data
