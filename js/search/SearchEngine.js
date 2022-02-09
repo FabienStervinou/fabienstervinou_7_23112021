@@ -100,9 +100,7 @@ export default class SearchEngine {
     const dataAppareil = this.simplifyAppareil(data)
     const dataUstensiles = this.simplifyUstensiles(data)
     const filterForm = new FilterForm()
-    filterForm.getFiltersData(dataIngredient, 'ingredient')
-    filterForm.getFiltersData(dataAppareil, 'appareil')
-    filterForm.getFiltersData(dataUstensiles, 'ustensiles')
+    filterForm.updateFiltersData(dataIngredient, dataAppareil, dataUstensiles)
   }
 
   simplifyIngredient (data) {
