@@ -69,32 +69,53 @@ export default class Search {
       window.localStorage.setItem('matchId', [...new Set(matchId)])
     } else if (isTagActive && matchIdLocal) {
       const tags = JSON.parse(window.localStorage.getItem('tags'))
-      const valueId = []
-      let result
+
+      if (value) {
+        const valueNoExistOnTags = tags.filter(tag => tag.includes(value)).length <= 0
+        const dataActualize = []
+
+        if (valueNoExistOnTags) {
+          this.dataSimplify.forEach(element => {
+            if (matchIdLocal.find(item => item == element.id)) {
+              element.simplify.forEach(word => {
+                if (word.includes(value)) {
+                  dataActualize.push(element)
+                  matchId.push(element.id)
+                }
+              })
+            }
+          })
+        }
+
+        console.log('dataActualize :', dataActualize)
+      }
 
       const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
 
-      for (let i = 0; i < matchIdLocal.length; i++) {
-        const idLocal = matchIdLocal[i]
+      // for (let i = 0; i < matchIdLocal.length; i++) {
+      //   // TODO: remove
+      //   const idLocal = matchIdLocal[i]
 
-        this.dataSimplify.forEach((element) => {
-          if (element.id == idLocal && tags.length <= 2) {
-            for (let i = 0; i < element.simplify.length; i++) {
-              const word = element.simplify[i]
-              if (word.includes(value)) {
-                valueId.push(element.id)
-              }
-            }
-          }
-        })
-        result = [...new Set(valueId)]
-        matchId = result
-      }
+      //   this.dataSimplify.forEach((element) => {
+      //     if (element.id == idLocal && tags.length <= 2) {
+      //       for (let i = 0; i < element.simplify.length; i++) {
+      //         const word = element.simplify[i]
+      //         if (word.includes(value)) {
+      //           valueId.push(element.id)
+      //         }
+      //       }
+      //     }
+      //   })
+      //   result = [...new Set(valueId)]
+      //   matchId = result
+      // }
 
       if (idTag) {
         window.localStorage.setItem('matchId', idTag)
       }
     } else if (isTagActive && !matchIdLocal) {
+      // TODO: remove
+      console.log('3')
       const tags = JSON.parse(window.localStorage.getItem('tags'))
       const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
 
@@ -105,7 +126,7 @@ export default class Search {
 
     // TODO:Clean local storage if nothing match
 
-    // Update searchEngin data filter
+    // Update searchEngine data filter
     const dataFilter = []
     const matchIdFilter = Array.from(window.localStorage.getItem('matchId').split(','))
     const matchIdFilterResult = matchIdFilter.map((x) => {
