@@ -14,6 +14,10 @@ export default class Tag {
   createTag (type, tag) {
     this.type = type
     this.tag = tag
+    const target = document.querySelector('#tags')
+    const localTag = window.localStorage.getItem('tags')
+
+    if (localTag && localTag.includes(tag)) return
 
     const tagContent = `
       <div class="tag-content">${tag}</div>
@@ -25,9 +29,6 @@ export default class Tag {
     const tagElement = document.createElement('div')
     tagElement.setAttribute('class', `tag ${type}`)
     tagElement.innerHTML = tagContent
-
-    const target = document.querySelector('#tags')
-
     target.insertAdjacentElement('afterbegin', tagElement)
 
     // Add event for remove tag
