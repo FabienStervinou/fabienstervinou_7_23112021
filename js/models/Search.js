@@ -69,6 +69,11 @@ export default class Search {
       window.localStorage.setItem('matchId', [...new Set(matchId)])
     } else if (isTagActive && matchIdLocal) {
       const tags = JSON.parse(window.localStorage.getItem('tags'))
+      const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
+
+      if (idTag) {
+        window.localStorage.setItem('matchId', idTag)
+      }
 
       if (value) {
         const valueNoExistOnTags = tags.filter(tag => tag.includes(value)).length <= 0
@@ -87,35 +92,9 @@ export default class Search {
           })
         }
 
-        console.log('dataActualize :', dataActualize)
-      }
-
-      const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
-
-      // for (let i = 0; i < matchIdLocal.length; i++) {
-      //   // TODO: remove
-      //   const idLocal = matchIdLocal[i]
-
-      //   this.dataSimplify.forEach((element) => {
-      //     if (element.id == idLocal && tags.length <= 2) {
-      //       for (let i = 0; i < element.simplify.length; i++) {
-      //         const word = element.simplify[i]
-      //         if (word.includes(value)) {
-      //           valueId.push(element.id)
-      //         }
-      //       }
-      //     }
-      //   })
-      //   result = [...new Set(valueId)]
-      //   matchId = result
-      // }
-
-      if (idTag) {
-        window.localStorage.setItem('matchId', idTag)
+        window.localStorage.setItem('matchId', matchId)
       }
     } else if (isTagActive && !matchIdLocal) {
-      // TODO: remove
-      console.log('3')
       const tags = JSON.parse(window.localStorage.getItem('tags'))
       const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
 
@@ -123,8 +102,6 @@ export default class Search {
         window.localStorage.setItem('matchId', idTag)
       }
     }
-
-    // TODO:Clean local storage if nothing match
 
     // Update searchEngine data filter
     const dataFilter = []
