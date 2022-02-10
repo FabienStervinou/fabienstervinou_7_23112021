@@ -91,8 +91,7 @@ export default class Search {
             }
           })
         }
-
-        window.localStorage.setItem('matchId', matchId)
+        window.localStorage.setItem('matchId', [...new Set(matchId)])
       }
     } else if (isTagActive && !matchIdLocal) {
       const tags = JSON.parse(window.localStorage.getItem('tags'))
