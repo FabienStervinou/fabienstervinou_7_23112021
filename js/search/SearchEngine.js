@@ -41,6 +41,7 @@ export default class SearchEngine {
 
   simplifyData (data) {
     const uniqueResultArray = []
+    if (data[0] == undefined) return
 
     for (let i = 0; i < data.length; i++) {
       const recipe = data[i]
