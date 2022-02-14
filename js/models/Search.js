@@ -93,7 +93,7 @@ export default class Search {
         }
         window.localStorage.setItem('matchId', [...new Set(matchId)])
       }
-    } else if (isTagActive && !matchIdLocal) {
+    } else if (isTagActive && !matchIdLocal && value == undefined) {
       const tags = JSON.parse(window.localStorage.getItem('tags'))
       const idTag = this.searchEngine.getIdByTag(tags, this.dataSimplify)
 
