@@ -42,10 +42,11 @@
     &-btn {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       width: 20%;
       background: none;
       border: none;
+      margin-right: 30px;
 
       &:hover {
         cursor: pointer;
