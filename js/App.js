@@ -61,16 +61,15 @@ class App {
     const localStorageSetHandler = function (e) {
       const isTagActive = !!(localStorage.getItem('tags') && (JSON.parse(localStorage.getItem('tags')) != 'null'))
 
-      console.log('key :', e.key)
+      // console.log('key :', e.key)
+      // console.log('key :', e.value)
 
       // TAG event
       if (e.key === 'tags') {
         if (isTagActive) {
-          console.log('tag update')
           search.updateRecipesSearch()
         } else {
           recipeCard.showNoRecipeMatch()
-          console.log('tag remove')
         }
       }
 
