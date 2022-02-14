@@ -69,10 +69,12 @@
       flex-direction: column;
       flex-flow: wrap;
       width: calc(100% - 40px);
+      max-height: 400px;
       padding: 0 20px 20px 20px;
       left: 0;
       top: 68px;
       visibility: hidden;
+      overflow-y: scroll;
 
       &.ingredient {
         background-color: $color-blue;
@@ -100,7 +102,8 @@
     } 
 
     &[data-active="true"]  {
-      width: 380px;
+      width: 670px;
+      z-index: 100;
 
       .filter-input {
         opacity: .5;
