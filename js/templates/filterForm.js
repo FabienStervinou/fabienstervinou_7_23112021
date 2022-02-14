@@ -77,7 +77,7 @@ export default class Filter {
     wrapper.setAttribute('class', 'filter-item')
     wrapper.innerHTML = template
 
-    wrapper.addEventListener('click', this.onClickFilterItem, event, false)
+    wrapper.addEventListener('click', this.onClickFilterItem, false)
     return wrapper
   }
 
@@ -104,20 +104,31 @@ export default class Filter {
     }
   }
 
-  onClickFilter () {
+  onClickFilter (event) {
     const arrow = this.querySelector('img')
     const item = this.querySelector('#items')
     const type = this.classList[2]
     const filters = document.querySelectorAll('.filter')
 
-    arrow.classList.toggle('open')
-    item.toggleAttribute('hidden')
-
     // Toggle data active attribute
-    if (this.dataset.active == 'true') {
+    if (this.dataset.active == 'true' && event.target.classList == 'open') {
       this.dataset.active = 'false'
+      arrow.classList.remove('open')
+      item.setAttribute('hidden', '')
     } else {
       this.dataset.active = 'true'
+      arrow.setAttribute('class', 'open')
+      item.removeAttribute('hidden')
+
+      // Close filter if click outside
+      document.querySelector('body').addEventListener('click', (e) => {
+        let filter = e.target.closest('.filter')
+        if (!filter) {
+          this.dataset.active = 'false'
+          arrow.classList.remove('open')
+          item.removeAttribute('hidden')
+        }
+      })
     }
 
     // Toggle other filter if open
