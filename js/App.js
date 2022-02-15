@@ -29,6 +29,7 @@ class App {
         this.recipeCard = new RecipeCard(recipe)
         this.recipeCard.createRecipeCard()
       }
+
       // Init form
       this.search = new Search(recipes)
       this.searchForm = new SearchForm(recipes)
@@ -61,9 +62,6 @@ class App {
     const localStorageSetHandler = function (e) {
       const isTagActive = !!(localStorage.getItem('tags') && (JSON.parse(localStorage.getItem('tags')) != 'null'))
 
-      // console.log('key :', e.key)
-      // console.log('key :', e.value)
-
       // TAG event
       if (e.key === 'tags') {
         if (isTagActive) {
@@ -72,14 +70,6 @@ class App {
           recipeCard.showNoRecipeMatch()
         }
       }
-
-      // TODO: remove block and function attached
-      // if (e.key === 'isSearchActive' && e.value === true) {
-      //   recipeCard.updateRecipesCard(window.localStorage.getItem('recipeIdMatch'))
-      // } else if (e.key === 'isSearchActive' && e.value === false && isTagActive) {
-      //   window.localStorage.removeItem('recipeIdMatch')
-      //   recipeCard.showAllRecipeCard()
-      // }
 
       const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
       if (e.key == 'matchId' && idsRecipesToUpdate) {

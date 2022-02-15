@@ -7,10 +7,6 @@ export default class Tag {
     this.wrapper = document.querySelector('#tags')
   }
 
-  init () {
-
-  }
-
   createTag (type, tag) {
     this.type = type
     this.tag = tag

@@ -81,15 +81,6 @@ export default class Filter {
     return wrapper
   }
 
-  listenLocalStorage () {
-    // const isSearchActive = window.localStorage.getItem('isSearchActive')
-    // const recipeIdMatch = window.localStorage.getItem('recipeIdMatch')
-
-    // if (isSearchActive && recipeIdMatch) {
-    //   console.log('recipeIdMatch :', recipeIdMatch)
-    // }
-  }
-
   onKeyUpFilter (event) {
     const filters = this.querySelectorAll('#item')
     const word = event.target.value
