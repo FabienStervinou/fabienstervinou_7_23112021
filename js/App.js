@@ -40,7 +40,6 @@ class App {
       this.listenLocalStorage()
 
       this.form = new Form()
-      this.form.init()
     }
   }
 
