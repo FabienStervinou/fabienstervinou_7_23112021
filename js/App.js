@@ -40,7 +40,6 @@ class App {
       this.listenLocalStorage()
 
       this.form = new Form()
-      this.form.init()
     }
   }
 
@@ -61,6 +60,9 @@ class App {
 
     const localStorageSetHandler = function (e) {
       const isTagActive = !!(localStorage.getItem('tags') && (JSON.parse(localStorage.getItem('tags')) != 'null'))
+
+      // console.log('log e.value :', e.value)
+      // console.log('log e.key :', e.key)
 
       // TAG event
       if (e.key === 'tags') {
