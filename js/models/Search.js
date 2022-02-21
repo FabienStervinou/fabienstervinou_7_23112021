@@ -118,7 +118,6 @@ export default class Search {
       const res = this.data.filter((recipe) => recipe.id == id)
       dataFilter.push(res[0])
     }
-    return this.searchEngine.simplifyData(dataFilter)
   }
 
   setLocalStorageIsSearchActiveTo (value) {
