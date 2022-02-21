@@ -34,7 +34,11 @@ export default class Search {
   onSearchKeyUp (e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
     if (e.target.value.length >= 3 || e.keyCode == 13) {
-      this.updateRecipesSearch(e.target.value)
+      console.time('performance test')
+      for (let i = 0; i < 1000; i++) {
+        this.updateRecipesSearch(e.target.value)
+      }
+      console.timeEnd('performance test')
     } else if (!isTagActive) {
       this.setLocalStorageIsSearchActiveTo(false)
     }
