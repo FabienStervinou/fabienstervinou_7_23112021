@@ -20,7 +20,7 @@ class App {
   }
 
   async main () {
-    console.log('App running 🔥')
+    console.log('App running 🔥 V2')
     const recipes = await this.fetchRecipes()
 
     if (recipes) {
