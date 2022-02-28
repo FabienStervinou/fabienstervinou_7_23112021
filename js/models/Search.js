@@ -1,4 +1,5 @@
 import SearchEngine from '../search/SearchEngine.js'
+import FilterForm from '../templates/filterForm.js'
 
 export default class Search {
   constructor (data) {
@@ -33,11 +34,7 @@ export default class Search {
   onSearchKeyUp (e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
     if (e.target.value.length >= 3 || e.keyCode == 13 || (e.target.value.length < 3 && isTagActive)) {
-      console.time('performance test')
-      for (let i = 0; i < 1000; i++) {
-        this.updateRecipesSearch(e.target.value)
-      }
-      console.timeEnd('performance test')
+      this.updateRecipesSearch(e.target.value)
     } else if (!isTagActive) {
       this.setLocalStorageIsSearchActiveTo(false)
     }
@@ -99,6 +96,27 @@ export default class Search {
       } else if (!valueTrim) {
         resultIds = idTag
       }
+    }
+
+    // Update searchEngine data filter
+    const dataFilter = []
+    const matchIdFilter = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId').split(',') : null
+    if (matchIdFilter) {
+      const matchIdFilterResult = matchIdFilter.map((x) => {
+        return parseInt(x, 10)
+      })
+
+      for (let i = 0; i < matchIdFilterResult.length; i++) {
+        const id = matchIdFilterResult[i]
+        const res = this.data.filter((recipe) => recipe.id == id)
+        dataFilter.push(res[0])
+      }
+
+      const dataIngredient = this.searchEngine.simplifyIngredient(dataFilter)
+      const dataAppareil = this.searchEngine.simplifyAppareil(dataFilter)
+      const dataUstensiles = this.searchEngine.simplifyUstensiles(dataFilter)
+      const filterForm = new FilterForm()
+      filterForm.updateFiltersData(dataIngredient, dataAppareil, dataUstensiles)
     }
 
     // Remove duplicate data from resultIds
