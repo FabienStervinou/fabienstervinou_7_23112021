@@ -1,4 +1,5 @@
 import SearchEngine from '../search/SearchEngine.js'
+import FilterForm from '../templates/filterForm.js'
 import { toNumbers } from '../utils/utils.js'
 
 export default class Search {
@@ -34,11 +35,7 @@ export default class Search {
   onSearchKeyUp (e) {
     const isTagActive = document.querySelector('#tags > .tag') != null
     if (e.target.value.length >= 3 || e.keyCode == 13) {
-      console.time('performance test')
-      for (let i = 0; i < 1000; i++) {
-        this.updateRecipesSearch(e.target.value)
-      }
-      console.timeEnd('performance test')
+      this.updateRecipesSearch(e.target.value)
     } else if (!isTagActive) {
       this.setLocalStorageIsSearchActiveTo(false)
     }
@@ -118,6 +115,12 @@ export default class Search {
       const res = this.data.filter((recipe) => recipe.id == id)
       dataFilter.push(res[0])
     }
+
+    const dataIngredient = this.searchEngine.simplifyIngredient(dataFilter)
+    const dataAppareil = this.searchEngine.simplifyAppareil(dataFilter)
+    const dataUstensiles = this.searchEngine.simplifyUstensiles(dataFilter)
+    const filterForm = new FilterForm()
+    filterForm.updateFiltersData(dataIngredient, dataAppareil, dataUstensiles)
   }
 
   setLocalStorageIsSearchActiveTo (value) {
