@@ -68,14 +68,15 @@ class App {
 
       // TAG event
       if (e.key === 'tags') {
-        if (isTagActive) {
+        if (isTagActive && !searchInputActive) {
           return search.updateRecipesSearch()
+        } else if (isTagActive && searchInputActive) {
+          return search.updateRecipesSearch(document.querySelector('#search').value)
         } else if (!isTagActive && !searchInputActive) {
           window.localStorage.removeItem('matchId')
           return recipeCard.showAllRecipeCard()
         } else if (!isTagActive && searchInputActive) {
-          search.updateRecipesSearch(document.querySelector('#search').value)
-          return search.updateRecipesSearch()
+          return search.updateRecipesSearch(document.querySelector('#search').value)
         }
       }
 
