@@ -60,6 +60,8 @@ class App {
 
     const localStorageSetHandler = function (e) {
       const isTagActive = !!(localStorage.getItem('tags') && (JSON.parse(localStorage.getItem('tags')) != 'null'))
+      const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
+      const searchInputActive = document.querySelector('#search').value.length >= 3
 
       // console.log('log e.value :', e.value)
       // console.log('log e.key :', e.key)
@@ -67,17 +69,20 @@ class App {
       // TAG event
       if (e.key === 'tags') {
         if (isTagActive) {
-          search.updateRecipesSearch()
-        } else {
-          recipeCard.showNoRecipeMatch()
+          return search.updateRecipesSearch()
+        } else if (!isTagActive && !searchInputActive) {
+          window.localStorage.removeItem('matchId')
+          return recipeCard.showAllRecipeCard()
+        } else if (!isTagActive && searchInputActive) {
+          search.updateRecipesSearch(document.querySelector('#search').value)
+          return search.updateRecipesSearch()
         }
       }
 
-      const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
-      if (e.key == 'matchId' && idsRecipesToUpdate && idsRecipesToUpdate != 'null') {
-        recipeCard.updateRecipesCard(idsRecipesToUpdate)
+      if ((e.key == 'matchId' && idsRecipesToUpdate && idsRecipesToUpdate != 'null') || (idsRecipesToUpdate && idsRecipesToUpdate != 'null')) {
+        return recipeCard.updateRecipesCard(idsRecipesToUpdate)
       } else if (e.key == 'matchId' && idsRecipesToUpdate == 'null') {
-        recipeCard.showNoRecipeMatch()
+        return recipeCard.showNoRecipeMatch()
       }
     }
 

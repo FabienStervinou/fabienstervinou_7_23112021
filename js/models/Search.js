@@ -35,8 +35,13 @@ export default class Search {
     const isTagActive = document.querySelector('#tags > .tag') != null
     if (e.target.value.length >= 3 || e.keyCode == 13 || (e.target.value.length < 3 && isTagActive)) {
       this.updateRecipesSearch(e.target.value)
-    } else if (!isTagActive) {
+    }
+
+    if (!isTagActive && document.querySelector('#search').value.length < 3) {
       this.setLocalStorageIsSearchActiveTo(false)
+    } else {
+      this.setLocalStorageIsSearchActiveTo(true)
+      this.updateRecipesSearch(e.target.value)
     }
   }
 
@@ -47,7 +52,8 @@ export default class Search {
   updateRecipesSearch (value) {
     const valueTrim = value ? value.trim().toLowerCase() : null
     let resultIds = []
-    const isTagActive = !!JSON.parse(window.localStorage.getItem('tags'))
+    const tagActive = JSON.parse(window.localStorage.getItem('tags'))
+    const isTagActive = tagActive != 'null' && tagActive != null
 
     // Get ids by data info
     if (value && valueTrim != null) {
