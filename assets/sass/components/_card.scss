@@ -69,6 +69,11 @@
           text-overflow: ellipsis;
           max-height: 101px;
           overflow: hidden;
+          word-break: break-word;
+          display: -webkit-box;
+          -webkit-line-clamp: 6;
+          -webkit-box-orient: vertical;
+          white-space: normal;
         }
       }
     }
