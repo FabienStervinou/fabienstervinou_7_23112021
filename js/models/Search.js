@@ -53,7 +53,7 @@ export default class Search {
     const valueTrim = value ? value.trim().toLowerCase() : null
     let resultIds = []
     const tagActive = JSON.parse(window.localStorage.getItem('tags'))
-    const isTagActive = tagActive != 'null' && tagActive != null
+    let isTagActive = tagActive != 'null' && tagActive != null
 
     // Get ids by data info
     if (value && valueTrim != null) {
@@ -83,6 +83,7 @@ export default class Search {
       // No ids match
       if (resultIds.length === 0) {
         resultIds.push('null')
+        isTagActive = false
       }
     }
 
