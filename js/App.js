@@ -1,4 +1,4 @@
-import Api from './api/Api.js'
+import Api from './api/api.js'
 import RecipeCard from './templates/recipeCard.js'
 import SearchForm from './templates/searchForm.js'
 import Search from './/models/Search.js'
