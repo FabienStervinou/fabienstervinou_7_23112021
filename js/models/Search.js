@@ -101,7 +101,7 @@ export default class Search {
     // Update searchEngine data filter
     const dataFilter = []
     const matchIdFilter = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId').split(',') : null
-    if (matchIdFilter) {
+    if (matchIdFilter != null && matchIdFilter != 'null') {
       const matchIdFilterResult = matchIdFilter.map((x) => {
         return parseInt(x, 10)
       })

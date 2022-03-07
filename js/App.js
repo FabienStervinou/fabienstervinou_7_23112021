@@ -74,9 +74,9 @@ class App {
       }
 
       const idsRecipesToUpdate = window.localStorage.getItem('matchId') ? window.localStorage.getItem('matchId') : null
-      if (e.key == 'matchId' && idsRecipesToUpdate) {
+      if (e.key == 'matchId' && idsRecipesToUpdate && idsRecipesToUpdate != 'null') {
         recipeCard.updateRecipesCard(idsRecipesToUpdate)
-      } else if (e.key == 'matchId' && !idsRecipesToUpdate) {
+      } else if (e.key == 'matchId' && idsRecipesToUpdate == 'null') {
         recipeCard.showNoRecipeMatch()
       }
     }
