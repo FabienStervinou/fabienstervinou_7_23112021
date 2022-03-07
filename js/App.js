@@ -6,7 +6,7 @@ import Form from './/models/Form.js'
 
 class App {
   constructor () {
-    this.recipesApi = new Api('../data/recipes.json')
+    this.recipesApi = new Api('./data/recipes.json')
     this.recipes = null
     this.recipeCard = null
     this.search = null
